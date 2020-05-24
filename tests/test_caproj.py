@@ -1,0 +1,4 @@
+from caproj.cli import main
+
+def test_main():
+    main([])
