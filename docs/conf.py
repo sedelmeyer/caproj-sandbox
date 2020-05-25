@@ -86,11 +86,11 @@ html_static_path = ['_static']
 # If using alabaster theme and hiding 'logo_name', use the 'logo' setting
 # in html_theme_options, otherwise, uncomment html_logo to activate site logo
 # html_logo = 'logo.png'
-# html_favicon = 'favicon.ico'
+html_favicon = '_static/favicon.ico'
 
 # html theme options for alabaster
 html_theme_options = {
-    # 'logo': 'logo.png',
+    'logo': 'logo.png',
     'logo_name': 'true',
     'github_user': 'sedelmeyer',
     'github_repo': 'nyc-capital-projects',
@@ -103,6 +103,9 @@ html_theme_options = {
     'show_powered_by': 'true',
     'show_relbar_bottom': 'true',
     'extra_nav_links': {
+        'Find me online at sedelmeyer.net': 'https://www.sedelmeyer.net/',
+        'github/sedelmeyer': 'https://github.com/sedelmeyer',
+        'linkedin/sedelmeyer': 'https://www.linkedin.com/in/sedelmeyer/'
     }
 }
 
