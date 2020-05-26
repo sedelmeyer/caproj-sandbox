@@ -9,10 +9,11 @@ Future releases
     * Recreate data cleansing pipeline with re-evaluated missing data handling
     * Recreate data sub-setting module
 
-v0.0.1 (2020-XX-XX)
+v0.0.1 (2020-05-25)
 -------------------
 
-* Draft initial readme and introduction
+* Generate intial site skeleton using ``gh-pages`` git branch
+* Draft initial readme and introduction text
 * Add custom project logo and favicon
 
 
