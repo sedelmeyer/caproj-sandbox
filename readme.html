@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>NYC Capital Projects &#8212; NYC Capital Projects 0.1.dev0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="canonical" href="https://sedelmeyer.github.io/nyc-capital-projects/readme.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="introduction.html" />
+    <link rel="prev" title="Predicting outcomes for NYC capital projects" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="nyc-capital-projects">
+<span id="readme"></span><h1>NYC Capital Projects<a class="headerlink" href="#nyc-capital-projects" title="Permalink to this headline">¶</a></h1>
+<p>This project is an exploratory analysis experimenting with different approaches to modeling and feature engineering to predict budget and schedule outcomes for New York City-managed capital projects with budgets greater than $25 million, using a <a class="reference external" href="https://www1.nyc.gov/site/capitalprojects/dashboard/category.page?category=All%20Capital%20Projects">data set hosted by NYC Open Data</a>.</p>
+<a class="reference external image-reference" href="https://travis-ci.com/sedelmeyer/nyc-capital-projects"><img alt="https://travis-ci.com/sedelmeyer/nyc-capital-projects.svg?branch=master" src="https://travis-ci.com/sedelmeyer/nyc-capital-projects.svg?branch=master" /></a>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#summary" id="id6">Summary</a></p></li>
+<li><p><a class="reference internal" href="#analysis-and-findings" id="id7">Analysis and findings</a></p></li>
+<li><p><a class="reference internal" href="#source-code-documentation" id="id8">Source code documentation</a></p></li>
+<li><p><a class="reference internal" href="#replicating-this-analysis" id="id9">Replicating this analysis</a></p></li>
+<li><p><a class="reference internal" href="#adding-to-this-project" id="id10">Adding to this project</a></p></li>
+<li><p><a class="reference internal" href="#questions-or-issues-related-to-this-project" id="id11">Questions or issues related to this project</a></p></li>
+<li><p><a class="reference internal" href="#sources-and-additional-resources" id="id12">Sources and additional resources</a></p></li>
+</ul>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This analysis is built upon one initially completed as a final project for <a class="reference external" href="https://harvard-iacs.github.io/2020-CS109B/">CS109B: Advanced Topics In Data Science</a>, a course offered by Harvard University’s John A. Paulson School of Engineering and Applied Sciences (SEAS). The authors of that original project are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/hoangthienan95">An Hoang</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mcdomx">Mark McDonald</a></p></li>
+<li><p><a class="reference external" href="https://github.com/sedelmeyer">Mike Sedelmeyer</a></p></li>
+</ul>
+<p>That original project can be found on GitHub at: <a class="reference external" href="https://github.com/mcdomx/cs109b_groupproject">https://github.com/mcdomx/cs109b_groupproject</a>. The final report summarizing the methods and findings for that project can be found in the <a class="reference external" href="https://github.com/mcdomx/cs109b_groupproject/blob/master/notebooks/Module-E-final-report-Group71.ipynb">Jupyter notebook-based report for that project</a>.</p>
+</div>
+<div class="section" id="analysis-and-findings">
+<h2>Analysis and findings<a class="headerlink" href="#analysis-and-findings" title="Permalink to this headline">¶</a></h2>
+<p>The analysis and findings associated with this project can be found here:</p>
+<p><a class="reference external" href="https://sedelmeyer.github.io/nyc-capital-projects">https://sedelmeyer.github.io/nyc-capital-projects</a></p>
+<div class="section" id="research-question">
+<h3>Research question<a class="headerlink" href="#research-question" title="Permalink to this headline">¶</a></h3>
+<p>After initial exploration and cleansing of the available data, modeling efforts focus on the following research question:</p>
+<ul class="simple">
+<li><p><em>Using very limited historical project data, can we predict how much the forecasted budget and duration of any given capital project run by the City of New York will deviate from its original budgeted estimates by the end of year-3 for the project?</em></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="source-code-documentation">
+<h2>Source code documentation<a class="headerlink" href="#source-code-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Documentation for the python modules built specifically for this analysis (i.e. modules located in the <code class="docutils literal notranslate"><span class="pre">./src/</span></code> directory of this project) can be found here:</p>
+<p><a class="reference external" href="https://sedelmeyer.github.io/nyc-capital-projects/modules.html">https://sedelmeyer.github.io/nyc-capital-projects/modules.html</a></p>
+</div>
+<div class="section" id="replicating-this-analysis">
+<span id="replication"></span><h2>Replicating this analysis<a class="headerlink" href="#replicating-this-analysis" title="Permalink to this headline">¶</a></h2>
+<p>In order to replicate this analysis and run the Python code available in this analysis locally, follow these steps:</p>
+<div class="contents local topic" id="in-this-section">
+<p class="topic-title">In this section</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ensure-system-requirements-are-met" id="id13">0. Ensure system requirements are met</a></p></li>
+<li><p><a class="reference internal" href="#clone-this-repository-locally" id="id14">1. Clone this repository locally</a></p></li>
+<li><p><a class="reference internal" href="#install-the-required-environment-using-pipenv" id="id15">2. Install the required environment using Pipenv</a></p></li>
+<li><p><a class="reference internal" href="#run-the-data-pipeline-and-analysis-workflows-locally" id="id16">3. Run the data pipeline and analysis workflows locally</a></p></li>
+<li><p><a class="reference internal" href="#explore-the-associated-jupyter-notebooks-included-with-this-project" id="id17">4. Explore the associated Jupyter notebooks included with this project</a></p></li>
+</ul>
+</div>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Below is a placeholder template containing typical steps required to replicate a PyData project.</p></li>
+<li><p>Content must be added to each section, outlining requirements and explaining how to replicate the analysis locally</p></li>
+</ul>
+</div>
+<div class="section" id="ensure-system-requirements-are-met">
+<h3>0. Ensure system requirements are met<a class="headerlink" href="#ensure-system-requirements-are-met" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="clone-this-repository-locally">
+<h3>1. Clone this repository locally<a class="headerlink" href="#clone-this-repository-locally" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="install-the-required-environment-using-pipenv">
+<h3>2. Install the required environment using Pipenv<a class="headerlink" href="#install-the-required-environment-using-pipenv" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="run-the-data-pipeline-and-analysis-workflows-locally">
+<h3>3. Run the data pipeline and analysis workflows locally<a class="headerlink" href="#run-the-data-pipeline-and-analysis-workflows-locally" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="explore-the-associated-jupyter-notebooks-included-with-this-project">
+<h3>4. Explore the associated Jupyter notebooks included with this project<a class="headerlink" href="#explore-the-associated-jupyter-notebooks-included-with-this-project" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="adding-to-this-project">
+<span id="development"></span><h2>Adding to this project<a class="headerlink" href="#adding-to-this-project" title="Permalink to this headline">¶</a></h2>
+<p>If you’d like to build off of this project to explore additional methods or to practice your own data science and development skills, below are some important notes regarding the configuration of this project.</p>
+<div class="contents local topic" id="id2">
+<p class="topic-title">In this section</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#project-repository-directory-structure-design-and-usage" id="id18">Project repository directory structure, design, and usage</a></p></li>
+<li><p><a class="reference internal" href="#python-package-configuration-and-associated-workflows" id="id19">Python package configuration and associated workflows</a></p></li>
+<li><p><a class="reference internal" href="#testing" id="id20">Testing</a></p></li>
+<li><p><a class="reference internal" href="#version-control-and-git-workflow" id="id21">Version control and git workflow</a></p></li>
+<li><p><a class="reference internal" href="#documentation-using-sphinx-and-restructuredtext" id="id22">Documentation using Sphinx and reStructuredText</a></p></li>
+</ul>
+</div>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Below are placeholder sections for explaining important characteristics of this project’s configuration.</p></li>
+<li><p>This section should contain all details required for someone else to easily begin adding additional development and analyses to this project.</p></li>
+</ul>
+</div>
+<div class="section" id="project-repository-directory-structure-design-and-usage">
+<h3>Project repository directory structure, design, and usage<a class="headerlink" href="#project-repository-directory-structure-design-and-usage" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="python-package-configuration-and-associated-workflows">
+<h3>Python package configuration and associated workflows<a class="headerlink" href="#python-package-configuration-and-associated-workflows" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="version-control-and-git-workflow">
+<h3>Version control and git workflow<a class="headerlink" href="#version-control-and-git-workflow" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="documentation-using-sphinx-and-restructuredtext">
+<h3>Documentation using Sphinx and reStructuredText<a class="headerlink" href="#documentation-using-sphinx-and-restructuredtext" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="questions-or-issues-related-to-this-project">
+<span id="issues"></span><h2>Questions or issues related to this project<a class="headerlink" href="#questions-or-issues-related-to-this-project" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Add details on the best method for others to reach you regarding questions they might have or issues they identify related to this project.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="sources-and-additional-resources">
+<span id="sources"></span><h2>Sources and additional resources<a class="headerlink" href="#sources-and-additional-resources" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="id5">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Add links to further reading and/or important resources related to this project.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="index.html" title="Previous document">Predicting outcomes for NYC capital projects</a>
+        </li>
+        <li>
+          <a href="introduction.html" title="Next document">Introduction</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">NYC Capital Projects</h1>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">An exploratory analysis experimenting with different approaches to feature engineering and modeling of NYC capital projects.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=sedelmeyer&repo=nyc-capital-projects&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/sedelmeyer/nyc-capital-projects">
+    <img
+        alt="https://secure.travis-ci.org/sedelmeyer/nyc-capital-projects.svg?branch=master"
+        src="https://secure.travis-ci.org/sedelmeyer/nyc-capital-projects.svg?branch=master"
+    />
+</a>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NYC Capital Projects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analysis-and-findings">Analysis and findings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-code-documentation">Source code documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#replicating-this-analysis">Replicating this analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-to-this-project">Adding to this project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#questions-or-issues-related-to-this-project">Questions or issues related to this project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sources-and-additional-resources">Sources and additional resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://www.sedelmeyer.net/">Find me online at sedelmeyer.net</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/sedelmeyer">github/sedelmeyer</a></li>
+    
+    <li class="toctree-l1"><a href="https://www.linkedin.com/in/sedelmeyer/">linkedin/sedelmeyer</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Predicting outcomes for NYC capital projects</a></li>
+      <li>Next: <a href="introduction.html" title="next chapter">Introduction</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019-2020, Michael Sedelmeyer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/readme.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/sedelmeyer/nyc-capital-projects" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
