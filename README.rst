@@ -1,5 +1,5 @@
 NYC Capital Projects
-===============================
+====================
 
 This project is an exploratory analysis experimenting with different approaches to modeling and feature engineering to predict budget and schedule outcomes for New York City-managed capital projects with budgets greater than $25 million, using a `data set hosted by NYC Open Data`_.
 
