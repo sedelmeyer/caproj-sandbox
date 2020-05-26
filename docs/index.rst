@@ -13,6 +13,7 @@ An investigation into feature engineering and modeling project-change data for l
    :maxdepth: 2
 
    readme
+   introduction
    changelog
 
 Indices and tables
