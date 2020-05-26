@@ -11,6 +11,10 @@ sphinx = "*"
 
 [packages]
 caproj = {editable = true,path = "."}
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
+jupyter = "*"
 
 [requires]
 python_version = "3.7"
