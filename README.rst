@@ -1,7 +1,7 @@
 NYC Capital Projects
 ===============================
 
-This project is an exploratory analysis experimenting with different approaches to modeling and feature engineering to predict outcomes for New York City managed capital projects with budgets greater than $25 million, using an openly available `data set hosted by NYC Open Data`_.
+This project is an exploratory analysis experimenting with different approaches to modeling and feature engineering to predict budget and schedule outcomes for New York City-managed capital projects with budgets greater than $25 million, using a `data set hosted by NYC Open Data`_.
 
 .. image:: https://travis-ci.com/sedelmeyer/nyc-capital-projects.svg?branch=master
     :target: https://travis-ci.com/sedelmeyer/nyc-capital-projects
@@ -14,13 +14,13 @@ This project is an exploratory analysis experimenting with different approaches 
 Summary
 -------
 
-This analysis replicates and builds from one initially completed as a final project for `CS109B Advanced Topics In Data Science`_, a course offered by Harvard University's John A. Paulson School of Engineering and Applied Sciences (SEAS). The authors of that original project are:
+This analysis is built upon one initially completed as a final project for `CS109B: Advanced Topics In Data Science`_, a course offered by Harvard University's John A. Paulson School of Engineering and Applied Sciences (SEAS). The authors of that original project are:
 
 - `An Hoang <https://github.com/hoangthienan95>`_
 - `Mark McDonald <https://github.com/mcdomx>`_
 - `Mike Sedelmeyer <https://github.com/sedelmeyer>`_
 
-The original project, on which this one is based, can be found on GitHub at: https://github.com/mcdomx/cs109b_groupproject. The final report summarizing the methods and findings for that project can be found in the `Jupyter Notebook-based final report for that project <https://github.com/mcdomx/cs109b_groupproject/blob/master/notebooks/Module-E-final-report-Group71.ipynb>`_.
+That original project can be found on GitHub at: https://github.com/mcdomx/cs109b_groupproject. The final report summarizing the methods and findings for that project can be found in the `Jupyter notebook-based report for that project <https://github.com/mcdomx/cs109b_groupproject/blob/master/notebooks/Module-E-final-report-Group71.ipynb>`_.
 
 
 Analysis and findings
@@ -29,6 +29,14 @@ Analysis and findings
 The analysis and findings associated with this project can be found here:
 
 https://sedelmeyer.github.io/nyc-capital-projects
+
+Research question
+^^^^^^^^^^^^^^^^^
+
+After initial exploration and cleansing of the available data, modeling efforts focus on the following research question:
+
+- *Using very limited historical project data, can we predict how much the forecasted budget and duration of any given capital project run by the City of New York will deviate from its original budgeted estimates by the end of year-3 for the project?*
+
 
 Source code documentation
 -------------------------
@@ -121,4 +129,4 @@ Sources and additional resources
 
 .. _data set hosted by NYC Open Data: https://www1.nyc.gov/site/capitalprojects/dashboard/category.page?category=All%20Capital%20Projects
 
-.. _CS109b Advanced Topics In Data Science: https://harvard-iacs.github.io/2020-CS109B/
+.. _`CS109b: Advanced Topics In Data Science`: https://harvard-iacs.github.io/2020-CS109B/
