@@ -9,6 +9,12 @@ Predicting outcomes for NYC capital projects
 An investigation into feature engineering and modeling project-change data for large-scale capital projects.
 -------------------------------------------------------------------------------------------------------------
 
+.. note::
+
+    This project is in the early stages of active development. Therefore this site currently contains little more than a starting skeleton with which to document the project and its findings as they are developed.
+
+    Check back later for additional content.
+
 .. toctree::
    :maxdepth: 2
 
