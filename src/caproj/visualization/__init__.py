@@ -3,6 +3,9 @@ This module contains functions for visualizing data and model results
 
 FUNCTIONS
 
+    save_plot()
+        Save a matplotlib plot to file
+
     plot_barplot()
         Generate a horizontal barplot from a pandas value_counts series
 """
@@ -10,6 +13,21 @@ FUNCTIONS
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+
+
+def save_plot(plt_object, savepath=None):
+    """Save a matplotlib plot to file
+
+    :param plt_object: matplotlib.pyplot plot object
+    :param savepath: string or None, specifies filepath at which to save the
+                     matplotlib plot. If None, nothing is saved. (Default is
+                     None)
+    :return: No objects are returned
+    """
+    if savepath:
+        plt_object.savefig(savepath)
+    else:
+        pass
 
 
 def plot_barplot(value_counts, title, height=6, varname=None,
@@ -25,7 +43,7 @@ def plot_barplot(value_counts, title, height=6, varname=None,
     :param label_space: float, a coefficient used to space the count label
                         an appropriate distance from the plotted bar
                         (default is 0.01)
-    :return: a matplotlib plot. No objects are returned
+    :return: a matplotlib plot is generated. No objects are returned
     """
     fig, ax = plt.subplots(figsize=(12, height))
 
