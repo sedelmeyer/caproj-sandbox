@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from caproj import visualization as vis
 
 
-class TestSavePlot(TestCase):
+class TestPlots(TestCase):
     """Test save_plot function"""
 
     def setUp(self):
@@ -42,3 +42,11 @@ class TestSavePlot(TestCase):
         with mock.patch("caproj.visualization.plt.show") as show_patch:
             vis.plot_barplot(value_counts=data, title='test')
             assert show_patch.called
+
+    def test_plot_barplot_saves(self):
+        """Test plot_barplot saves to file using savefile"""
+        data = self.data['x'].value_counts()
+        with TemporaryDirectory() as tmp:
+            fp = os.path.join(tmp, 'test.png')
+            vis.plot_barplot(value_counts=data, title='test', savepath=fp)
+            assert os.path.exists(fp)
