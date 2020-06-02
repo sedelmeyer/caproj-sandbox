@@ -2,7 +2,6 @@ import os
 from unittest import TestCase, mock
 from tempfile import TemporaryDirectory
 
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -32,7 +31,14 @@ class TestSavePlot(TestCase):
 
     def test_save_plot_none(self):
         """Test save_plot function passes with no savepath"""
-        with TemporaryDirectory() as tmp:
+        with TemporaryDirectory():
             plt.plot(self.data['x'], self.data['y'])
             vis.save_plot(plt_object=plt, savepath=None)
-            assert not os.path.exists(fp)
+            pass
+
+    def test_plot_barplot(self):
+        """Test plot_barplot function shows plot without error"""
+        data = self.data['x'].value_counts()
+        with mock.patch("caproj.visualization.plt.show") as show_patch:
+            vis.plot_barplot(value_counts=data, title='test')
+            assert show_patch.called
