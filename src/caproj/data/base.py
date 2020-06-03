@@ -27,11 +27,9 @@ class BaseData(object):
         _, ext = os.path.splitext(filename)
         if ext == '.csv':
             input_df = pd.read_csv(filename, **read_kwargs)
-        elif ext in ('.xls', '.xlsx'):
-            input_df = pd.read_excel(filename, **read_kwargs)
         else:
             raise TypeError(
-                'from_file reads only .csv, .xls, or .xlsx filetypes'
+                'from_file reads only .csv filetypes'
             )
         return cls(input_df, copy_input)
 
