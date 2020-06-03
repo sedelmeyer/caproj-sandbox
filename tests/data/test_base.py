@@ -5,7 +5,6 @@ import os
 from unittest import TestCase
 from tempfile import TemporaryDirectory
 
-import numpy as np
 import pandas as pd
 
 from caproj.data.base import BaseData
@@ -14,44 +13,35 @@ from caproj.data.base import BaseData
 class BaseDataClassTests(TestCase):
     """Tests to ensure class data.BaseDataClass functions properly"""
 
+    # TODO: Add SetUp() to make simple dataframe for reuse throughout
+    # TODO: Remove Excel read tests
+
+    def setUp(self):
+        """Set up data for tests"""
+        self.data = pd.DataFrame(
+            {
+                'x': [0, 1, 2, 3],
+                'y': [2, 3, 4, 5]
+            }
+        )
+        return super().setUp()
+
     def test_from_file_csv(self):
         """ensure csv is read and stored to BaseDataClass class"""
         with TemporaryDirectory() as tmp:
-            fp, df_test = save_simple_dataframe(tmp, 'test.csv')
-            df_read = BaseDataClass.from_file(fp).df
+            fp = os.path.join(tmp, 'test.csv')
+            self.data.to_csv(fp, index=False)
+            df_read = BaseData.from_file(fp).df
             self.assertEqual(
-                pd.testing.assert_frame_equal(df_test, df_read),
-                None,
-            )
-
-    def test_from_file_xls(self):
-        """ensure xls is read and stored to BaseDataClass class"""
-        with TemporaryDirectory() as tmp:
-            fp, df_test = save_simple_dataframe(tmp, 'test.xls')
-            df_read = BaseDataClass.from_file(fp).df
-            self.assertEqual(
-                pd.testing.assert_frame_equal(df_test, df_read),
-                None,
-            )
-
-    def test_from_file_xlsx(self):
-        """ensure xlsx is read and stored to BaseDataClass class"""
-        with TemporaryDirectory() as tmp:
-            fp, df_test = save_simple_dataframe(tmp, 'test.xlsx')
-            df_read = BaseDataClass.from_file(fp).df
-            self.assertEqual(
-                pd.testing.assert_frame_equal(df_test, df_read),
+                pd.testing.assert_frame_equal(self.data, df_read),
                 None,
             )
 
     def test_from_file_fail(self):
         """ensure from_file fails elegantly with wrong filetype read"""
-        with TemporaryDirectory() as tmp:
-            fp = os.path.join(tmp, "test.txt")
-            open(fp, 'a').close()
-            assert os.path.exists(fp)
-            with self.assertRaises(TypeError):
-                BaseDataClass.from_file(fp)
+        fp = "test.txt"
+        with self.assertRaises(TypeError):
+            BaseData.from_file(fp)
 
     def test_from_file_inputdf_persists(self):
         """ensure input_df persist only when specified"""
