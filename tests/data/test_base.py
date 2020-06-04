@@ -10,7 +10,7 @@ import pandas as pd
 from caproj.data.base import BaseData
 
 
-class BaseDataClassTests(TestCase):
+class BaseDataTests(TestCase):
     """Tests to ensure class data.BaseDataClass functions properly"""
 
     # TODO: Add SetUp() to make simple dataframe for reuse throughout
@@ -46,14 +46,21 @@ class BaseDataClassTests(TestCase):
     def test_from_file_inputdf_persists(self):
         """ensure input_df persist only when specified"""
         with TemporaryDirectory() as tmp:
-            fp, df_test = save_simple_dataframe(tmp, 'test.xlsx')
-            df_read = BaseDataClass.from_file(fp, copy_input=True).input_df
+            fp = os.path.join(tmp, 'test.csv')
+            self.data.to_csv(fp, index=False)
+            df_read = BaseData.from_file(fp, copy_input=True).input_df
             self.assertEqual(
-                pd.testing.assert_frame_equal(df_test, df_read),
+                pd.testing.assert_frame_equal(self.data, df_read),
                 None,
             )
+
+    def test_from_file_inputdf_not_created(self):
+        """ensure input_df persist only when specified"""
+        with TemporaryDirectory() as tmp:
+            fp = os.path.join(tmp, 'test.csv')
+            self.data.to_csv(fp, index=False)
             with self.assertRaises(AttributeError):
-                BaseDataClass.from_file(fp).input_df
+                BaseData.from_file(fp).input_df
 
     def test_from_object_df(self):
         """ensure dataframe object is read and stored to BaseDataClass class"""
