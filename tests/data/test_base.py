@@ -11,10 +11,7 @@ from caproj.data.base import BaseData
 
 
 class BaseDataTests(TestCase):
-    """Tests to ensure class data.BaseDataClass functions properly"""
-
-    # TODO: Add SetUp() to make simple dataframe for reuse throughout
-    # TODO: Remove Excel read tests
+    """Tests to ensure class caproj.data.BaseData functions properly"""
 
     def setUp(self):
         """Set up data for tests"""
@@ -27,7 +24,7 @@ class BaseDataTests(TestCase):
         return super().setUp()
 
     def test_from_file_csv(self):
-        """ensure csv is read and stored to BaseDataClass class"""
+        """Ensure csv is read and stored to BaseDataClass class"""
         with TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, 'test.csv')
             self.data.to_csv(fp, index=False)
@@ -38,13 +35,13 @@ class BaseDataTests(TestCase):
             )
 
     def test_from_file_fail(self):
-        """ensure from_file fails elegantly with wrong filetype read"""
+        """Ensure from_file fails elegantly with wrong filetype read"""
         fp = "test.txt"
         with self.assertRaises(TypeError):
             BaseData.from_file(fp)
 
     def test_from_file_inputdf_persists(self):
-        """ensure input_df persist only when specified"""
+        """Ensure input_df persist only when specified"""
         with TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, 'test.csv')
             self.data.to_csv(fp, index=False)
@@ -55,7 +52,7 @@ class BaseDataTests(TestCase):
             )
 
     def test_from_file_inputdf_not_created(self):
-        """ensure input_df persist only when specified"""
+        """Ensure input_df persist only when specified"""
         with TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, 'test.csv')
             self.data.to_csv(fp, index=False)
@@ -63,37 +60,34 @@ class BaseDataTests(TestCase):
                 BaseData.from_file(fp).input_df
 
     def test_from_object_df(self):
-        """ensure dataframe object is read and stored to BaseDataClass class"""
-        df_test = make_simple_dataframe()
-        df_read = BaseDataClass.from_object(df_test).df
+        """Ensure dataframe object is read and stored to BaseDataClass class"""
+        df_read = BaseData.from_object(self.data).df
         self.assertEqual(
-            pd.testing.assert_frame_equal(df_test, df_read),
+            pd.testing.assert_frame_equal(self.data, df_read),
             None,
         )
 
     def test_from_object_class(self):
-        """ensure class.df object is read and stored to BaseDataClass class"""
-        df_test = make_simple_dataframe()
-        Base_object = BaseDataClass.from_object(df_test)
-        df_read = BaseDataClass.from_object(Base_object).df
+        """Ensure class.df object is read and stored to BaseDataClass class"""
+        Base_object = BaseData.from_object(self.data)
+        df_read = BaseData.from_object(Base_object).df
         self.assertEqual(
-            pd.testing.assert_frame_equal(df_test, df_read),
+            pd.testing.assert_frame_equal(self.data, df_read),
             None,
         )
 
     def test_from_object_fail(self):
-        """ensure from_object fails elegantly with invalid object"""
+        """Ensure from_object fails elegantly with invalid object"""
         class InvalidClass(object):
             pass
         Invalid_object = InvalidClass()
         with self.assertRaises(TypeError):
-            BaseDataClass.from_object(Invalid_object)
+            BaseData.from_object(Invalid_object)
 
     def test_to_file(self):
-        """ensure to_file saves self.df to disk"""
+        """Ensure to_file saves self.df to disk"""
         with TemporaryDirectory() as tmp:
-            df_test = make_simple_dataframe()
-            Base = BaseDataClass.from_object(df_test)
+            Base = BaseData.from_object(self.data)
             fp_save = os.path.join(tmp, "test_save.csv")
             Base.to_file(fp_save)
             assert os.path.exists(fp_save)
