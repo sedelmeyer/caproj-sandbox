@@ -1,6 +1,16 @@
 import os
+import sys
+import logging
 
 import pandas as pd
+
+
+shandler = logging.StreamHandler(sys.stdout)
+formatter = logging.Formatter('%(levelname)s: %(message)s')
+shandler.setFormatter(formatter)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+logger.addHandler(shandler)
 
 
 class BaseData(object):
@@ -81,3 +91,13 @@ class BaseData(object):
         """
         # TODO: to_file saves will need trigger log file in future versions
         self.df.to_csv(target_filename, index=False, **to_csv_kwargs)
+
+    def log_record_count(self, id_col='PID'):
+        """Log number of records and unique projects in :attr:`df`
+        """
+        logging.info(
+            'Number of project change records: {}'.format(len(self.df))
+        )
+        logging.info(
+            'Number of unique projects in dataset: {}'.format(self.df[id_col].nunique())
+        )
