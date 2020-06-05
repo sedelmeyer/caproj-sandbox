@@ -4,9 +4,17 @@ import pandas as pd
 
 
 class BaseData(object):
-    """
-    Manage base read/write operations and instantiates
-    ``self.df`` for child classes across ``data`` submodule classes
+    """Manage base read/write operations for ``caproj.data`` module classes
+
+    :cvar df: pandas.DataFrame working copy either read in from
+              from file or from an existing object by using ``BaseData``
+              initializing class methods :meth: `~from_file` or
+              :meth: `~from_object`
+    :cvar input_df: pandas.DataFrame original input copy, not operated
+                    upon by any class methods, and only created if
+                    ``copy_input`` parameter set to ``True`` during
+                    ``BaseData`` :meth: `~from_file` or :meth: `~from_object`
+                    class creation
     """
 
     def __init__(self, input_df, copy_input):
@@ -18,11 +26,12 @@ class BaseData(object):
     def from_file(cls, filename, copy_input=False, **read_kwargs):
         """Invoke ``BaseData`` and read csv or excel into pandas.DataFrame
 
-        :param filename: str filename of .csv, .xls, or .xlsx file to be read
+        :param filename: str filename of .csv file to be read
         :param copy_input: bool to specify whether self.input_df persists
         :param read_kwargs: optional args to pandas.DataFrame.read_csv() or
                             pandas.DataFrame.read_excel()
-        :return: pandas.DataFrame and copy_input bool as class variables
+        :return: pandas.DataFrame and copy_input bool as class attributes
+        :raise TypeError: if the ``filename`` is not a .csv filetype
         """
         _, ext = os.path.splitext(filename)
         if ext == '.csv':
@@ -44,6 +53,10 @@ class BaseData(object):
         :param input_object: object to be read into ``BaseData``
         :param copy_input: bool to specify whether self.input_df persists
         :return: pandas.DataFrame and copy_input bool as class variables
+        :raise TypeError: if the ``input_object`` is neither a
+                          pandas.Dataframe nor a ``BaseData`` object with an
+                          existing ``BaseData.df`` attribute
+
         """
         if isinstance(input_object, pd.DataFrame):
             input_df = input_object.copy()
