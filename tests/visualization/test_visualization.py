@@ -43,10 +43,10 @@ class TestPlots(TestCase):
             vis.plot_barplot(value_counts=data, title='test')
             assert show_patch.called
 
-    def test_plot_barplot_saves(self):
-        """Test plot_barplot saves to file using savefile"""
-        data = self.data['x'].value_counts()
-        with TemporaryDirectory() as tmp:
-            fp = os.path.join(tmp, 'test.png')
-            vis.plot_barplot(value_counts=data, title='test', savepath=fp)
-            assert os.path.exists(fp)
+    # def test_plot_barplot_saves(self):
+    #     """Test plot_barplot saves to file using savefile"""
+    #     data = self.data['x'].value_counts()
+    #     with TemporaryDirectory() as tmp:
+    #         fp = os.path.join(tmp, 'test.png')
+    #         vis.plot_barplot(value_counts=data, title='test', savepath=fp)
+    #         assert os.path.exists(fp)
