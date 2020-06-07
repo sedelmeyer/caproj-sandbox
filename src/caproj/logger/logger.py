@@ -7,6 +7,15 @@ import logging
 import time
 from functools import wraps
 
+logger = logging.getLogger()
+
+shandler = logging.StreamHandler(sys.stdout)
+formatter = logging.Formatter('%(levelname)s: %(message)s')
+shandler.setFormatter(formatter)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+logger.addHandler(shandler)
+
 log_file = '{}.log'.format(__name__)
 log_level = logging.INFO
 logging.basicConfig(
@@ -45,7 +54,3 @@ def timer(orig_func):
         return result
 
     return wrapper
-
-    © 2020 GitHub, Inc.
-    Terms
-    Privacy
