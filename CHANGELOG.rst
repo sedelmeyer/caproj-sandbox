@@ -15,6 +15,9 @@ v0.1.0 (XXXX-XX-XX)
 * Add data cleansing pipeline as ``data`` submodules
 * Add basic EDA plotting functions to ``visualization`` submodules
 * Add corresponding unit tests
+* Add basic logging configuration and ``caproj.logger`` module functionality
+    * add logger unit tests
+    * modify decorator logging functions
 
 .. todo::
 
