@@ -14,10 +14,11 @@
         "level": "INFO",
         "formatter": "simple",
         "stream": "ext://sys.stdout"
-      },
+      }
+    },
 
     "root": {
       "level": "INFO",
       "handlers": ["console"]
     }
-  }
+}
