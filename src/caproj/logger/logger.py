@@ -1,27 +1,13 @@
 """
-This module contains the sets base logger and logging functions used
-throughout ``caproj``
+caproj.logger.logger
+~~~~~~~~~~~~~~~~~~~~
+
+This module contains logging functions used throughout ``caproj``
 """
 
 import logging
 import time
 from functools import wraps
-
-logger = logging.getLogger()
-
-shandler = logging.StreamHandler(sys.stdout)
-formatter = logging.Formatter('%(levelname)s: %(message)s')
-shandler.setFormatter(formatter)
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-logger.addHandler(shandler)
-
-log_file = '{}.log'.format(__name__)
-log_level = logging.INFO
-logging.basicConfig(
-    level=log_level, filename=log_file, filemode="w+",
-    format="%(asctime)-15s %(levelname)-8s %(message)s"
-    )
 
 
 def log_func(orig_func):
