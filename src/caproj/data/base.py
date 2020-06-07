@@ -1,29 +1,31 @@
+"""
+caproj.data.base
+~~~~~~~~~~~~~~~~
+
+This module contains the core :mod:`caproj.data` read and write functionality
+"""
+
 import os
-import sys
 import logging
 
 import pandas as pd
 
 
-shandler = logging.StreamHandler(sys.stdout)
-formatter = logging.Formatter('%(levelname)s: %(message)s')
-shandler.setFormatter(formatter)
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-logger.addHandler(shandler)
+# TODO: move getLogger call inside of ``BaseData`` class
+log = logging.getLogger(__name__)
 
 
 class BaseData(object):
-    """Manage base read/write operations for ``caproj.data`` module classes
+    """Manage base read/write operations for :py:mod:`caproj.data` module classes
 
     :cvar df: pandas.DataFrame working copy either read in from
               from file or from an existing object by using ``BaseData``
-              initializing class methods :meth: `~from_file` or
-              :meth: `~from_object`
+              initializing class methods :meth:`BaseData.from_file` or
+              :meth:`BaseData.from_object`
     :cvar input_df: pandas.DataFrame original input copy, not operated
                     upon by any class methods, and only created if
                     ``copy_input`` parameter set to ``True`` during
-                    ``BaseData`` :meth: `~from_file` or :meth: `~from_object`
+                    :meth:`BaseData.from_file` or :meth:`~BaseData.from_object`
                     class creation
     """
 
@@ -84,7 +86,7 @@ class BaseData(object):
         return cls(input_df, copy_input)
 
     def to_file(self, target_filename, **to_csv_kwargs):
-        """Save current version of ``self.df`` to file in .csv format
+        """Save current version of :attr:`BaseData.df` to file in .csv format
 
         :param target_filename: str filename to which csv should be written
         :param to_csv_kwargs: optional args to pandas.DataFrame.to_csv()
@@ -95,9 +97,9 @@ class BaseData(object):
     def log_record_count(self, id_col='PID'):
         """Log number of records and unique projects in :attr:`df`
         """
-        logging.info(
+        log.info(
             'Number of project change records: {}'.format(len(self.df))
         )
-        logging.info(
+        log.info(
             'Number of unique projects in dataset: {}'.format(self.df[id_col].nunique())
         )
