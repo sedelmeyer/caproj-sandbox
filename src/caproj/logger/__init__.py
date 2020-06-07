@@ -1,5 +1,8 @@
 """
+caproj.logger
+~~~~~~~~~~~~~
 
+This module handles setup of logging configuration for ``caproj`` package
 """
 
 import os
