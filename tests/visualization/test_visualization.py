@@ -9,7 +9,7 @@ from caproj import visualization as vis
 
 
 class TestPlots(TestCase):
-    """Test save_plot function"""
+    """Test basic plotting functions"""
 
     def setUp(self):
         """Set up data for tests"""
