@@ -27,7 +27,7 @@ class TestPlots(TestCase):
             plt.plot(self.data['x'], self.data['y'])
             fp = os.path.join(tmp, 'test.png')
             vis.save_plot(plt_object=plt, savepath=fp)
-            assert os.path.exists(fp)
+            self.assertTrue(os.path.exists(fp))
 
     def test_save_plot_none(self):
         """Test save_plot function passes with no savepath"""
@@ -41,7 +41,7 @@ class TestPlots(TestCase):
         data = self.data['x'].value_counts()
         with mock.patch("caproj.visualization.plt.show") as show_patch:
             vis.plot_barplot(value_counts=data, title='test')
-            assert show_patch.called
+            self.assertTrue(show_patch.called)
 
     # def test_plot_barplot_saves(self):
     #     """Test plot_barplot saves to file using savefile"""
