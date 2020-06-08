@@ -1,3 +1,4 @@
+import logging
 from pkg_resources import get_distribution, DistributionNotFound
 
 try:
@@ -5,3 +6,5 @@ try:
 except DistributionNotFound:
     # package is not installed
     pass
+
+logging.getLogger('foo').addHandler(logging.NullHandler())
