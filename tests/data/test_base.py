@@ -91,7 +91,7 @@ class BaseDataTests(TestCase):
             Base = BaseData.from_object(self.data)
             fp_save = os.path.join(tmp, "test_save.csv")
             Base.to_file(fp_save)
-            assert os.path.exists(fp_save)
+            self.assertTrue(os.path.exists(fp_save))
 
     def test_log_record_count(self):
         """Ensure log_record_count returns log"""
