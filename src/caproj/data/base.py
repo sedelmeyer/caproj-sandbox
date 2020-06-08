@@ -3,6 +3,14 @@ caproj.data.base
 ~~~~~~~~~~~~~~~~
 
 This module contains the core :mod:`caproj.data` read and write functionality
+
+**Module classes:**
+
+.. autosummary::
+
+   BaseData
+
+|
 """
 
 import os
@@ -27,6 +35,15 @@ class BaseData(object):
                     ``copy_input`` parameter set to ``True`` during
                     :meth:`BaseData.from_file` or :meth:`~BaseData.from_object`
                     class creation
+
+    **Class methods:**
+
+    .. autosummary::
+
+       BaseData.from_file
+       BaseData.from_object
+       BaseData.to_file
+       BaseData.log_record_count
     """
 
     def __init__(self, input_df, copy_input):
