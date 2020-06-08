@@ -96,5 +96,6 @@ class BaseDataTests(TestCase):
     def test_log_record_count(self):
         """Ensure log_record_count returns log"""
         Base_object = BaseData.from_object(self.data)
-        with self.assertLogs('caproj.data.base', level='INFO') as log:
+        with self.assertLogs('caproj.data.base', level='INFO') as logmsg:
             Base_object.log_record_count(id_col='x')
+            self.assertTrue(len(logmsg) > 0)
