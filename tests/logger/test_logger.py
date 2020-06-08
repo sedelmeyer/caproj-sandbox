@@ -20,7 +20,7 @@ class TestLoggingSetup(TestCase):
             'caproj.logger.logging.basicConfig'
         ) as basicConfig_patch:
             logger.setup_logging(default_path='foo.json', env_key='foo')
-            assert basicConfig_patch.called
+            self.assertTrue(basicConfig_patch.called)
 
     def test_setup_logging_dictConfig(self):
         """Test setup_logging initializes with dictConfig from file"""
@@ -31,4 +31,4 @@ class TestLoggingSetup(TestCase):
                 'caproj.logger.logging.config.dictConfig'
             ) as dictConfig_patch:
                 logger.setup_logging(default_path=fp, env_key='foo')
-                assert dictConfig_patch.called
+                self.assertTrue(dictConfig_patch.called)
