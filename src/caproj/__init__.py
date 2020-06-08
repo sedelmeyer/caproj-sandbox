@@ -7,4 +7,4 @@ except DistributionNotFound:
     # package is not installed
     pass
 
-logging.getLogger('foo').addHandler(logging.NullHandler())
+logging.getLogger('caproj').addHandler(logging.NullHandler())
