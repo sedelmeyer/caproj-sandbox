@@ -1,3 +1,4 @@
+import logging
 import os
 from unittest import TestCase, mock
 from tempfile import TemporaryDirectory
@@ -32,3 +33,21 @@ class TestLoggingSetup(TestCase):
             ) as dictConfig_patch:
                 logger.setup_logging(default_path=fp, env_key='foo')
                 self.assertTrue(dictConfig_patch.called)
+
+
+class TestLogFunc(TestCase):
+    """Test logfunc logging decorator"""
+    log = logging.getLogger('test')
+
+    @logger.logfunc(
+        log=log, funcname=True, docdescr=True, argvals=True, runtime=True
+    )
+    def test_func(self, **kwargs):
+        """Decorated test function for testing logfunc"""
+        pass
+
+    def test_logfunc_logs(self):
+        """Ensure logfunc provides all logs"""
+        with self.assertLogs('test', level='INFO') as logmsg:
+            self.test_func(kwarg1='foo', kwarg2='bar')
+            self.assertTrue(len(logmsg.output) == 4)
