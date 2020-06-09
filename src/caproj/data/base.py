@@ -51,6 +51,7 @@ class BaseData(object):
         if copy_input:
             self.input_df = input_df.copy()  # input df persists for reference
         self.df = input_df  # all basedata changes applied to this df
+        self.log_record_count()
 
     @classmethod
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
