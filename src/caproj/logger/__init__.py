@@ -5,11 +5,13 @@ caproj.logger
 This module handles setup of logging configuration for ``caproj`` package
 """
 
-import os
-import sys
+import functools
 import json
 import logging
 import logging.config
+import os
+import sys
+import time
 
 
 def setup_logging(
@@ -58,3 +60,52 @@ def setup_logging(
                 default_level
             )
         )
+
+
+def logfunc(orig_func=None, log=None,
+            funcname=False, argvals=False,
+            docdescr=False, runtime=False):
+    """Wrap function call to provide log information when function is called
+
+    This function acts as a ``functools.wraps`` decorator for decorating
+    functions or methods to provide logging functionality to log details
+    of the decorated function
+
+    :param orig_func:
+    :param log:
+    :param func:
+    :arg:
+    """
+
+    if not orig_func:
+        return functools.partial(
+            logfunc, log=log,
+            funcname=funcname, argvals=argvals,
+            docdescr=docdescr, runtime=runtime
+        )
+
+    @functools.wraps(orig_func)
+    def wrapper(*args, **kwargs):
+
+        if funcname:
+            log.info('Run function {}'.format(orig_func.__name__))
+
+        if docdescr:
+            log.info(orig_func.__doc__.partition('\n')[0])
+
+        if argvals:
+            log.info(
+                'Run with args: {}, and kwargs: {}'.format(args, kwargs)
+            )
+
+        if runtime:
+            t1 = time.time()
+            result = orig_func(*args, **kwargs)
+            t2 = time.time() - t1
+            log.info('{} run time: {:.3f} sec'.format(orig_func.__name__, t2))
+            return result
+
+        else:
+            return orig_func(*args, **kwargs)
+
+    return wrapper
