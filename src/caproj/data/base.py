@@ -13,11 +13,12 @@ This module contains the core :mod:`caproj.data` read and write functionality
 |
 """
 
-import os
 import logging
+import os
 
 import pandas as pd
 
+from caproj.logger import logfunc
 
 # TODO: move getLogger call inside of ``BaseData`` class
 log = logging.getLogger(__name__)
@@ -52,8 +53,9 @@ class BaseData(object):
         self.df = input_df  # all basedata changes applied to this df
 
     @classmethod
+    @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
     def from_file(cls, filename, copy_input=False, **read_kwargs):
-        """Invoke ``BaseData`` and read csv or excel into pandas.DataFrame
+        """Invoke BaseData class and read csv into pandas.DataFrame
 
         :param filename: str filename of .csv file to be read
         :param copy_input: bool to specify whether self.input_df persists
@@ -72,8 +74,9 @@ class BaseData(object):
         return cls(input_df, copy_input)
 
     @classmethod
+    @logfunc(log=log, funcname=True, docdescr=True, argvals=False, runtime=False)
     def from_object(cls, input_object, copy_input=False):
-        """Invoke ``BaseData`` and read dataframe from in-memory object
+        """Invoke BaseData and read dataframe from in-memory object
 
         Input objects can be either (a) an existing ``BaseData`` object, in
         which case the ``pandas.DataFrame`` stored within that object will be
@@ -93,7 +96,6 @@ class BaseData(object):
             try:
                 if isinstance(input_object.df, pd.DataFrame):
                     input_df = input_object.df.copy()
-                    # TODO implement self.log = input_object.log.copy()
             except:
                 raise TypeError(
                     'input_object must be either pandas.DataFrame or '
@@ -102,8 +104,9 @@ class BaseData(object):
                 )
         return cls(input_df, copy_input)
 
+    @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
     def to_file(self, target_filename, **to_csv_kwargs):
-        """Save current version of :attr:`BaseData.df` to file in .csv format
+        """Save current version of BaseData.df to file in .csv format
 
         :param target_filename: str filename to which csv should be written
         :param to_csv_kwargs: optional args to pandas.DataFrame.to_csv()
@@ -112,7 +115,7 @@ class BaseData(object):
         self.df.to_csv(target_filename, index=False, **to_csv_kwargs)
 
     def log_record_count(self, id_col='PID'):
-        """Log number of records and unique projects in :attr:`df`
+        """Log number of records and unique projects in `BaseData.df`
         """
         log.info(
             'Number of project change records: {}'.format(len(self.df))
