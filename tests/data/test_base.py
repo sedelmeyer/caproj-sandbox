@@ -18,7 +18,7 @@ class BaseDataTests(TestCase):
         self.x = [0, 1, 1, 0]
         self.data = pd.DataFrame(
             {
-                'x': self.x,
+                'PID': self.x,
                 'y': [2, 3, 4, 5]
             }
         )
@@ -97,5 +97,5 @@ class BaseDataTests(TestCase):
         """Ensure log_record_count returns log"""
         Base_object = BaseData.from_object(self.data)
         with self.assertLogs('caproj.data.base', level='INFO') as logmsg:
-            Base_object.log_record_count(id_col='x')
+            Base_object.log_record_count(id_col='PID')
             self.assertTrue(len(logmsg) > 0)
