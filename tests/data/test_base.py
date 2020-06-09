@@ -15,9 +15,10 @@ class BaseDataTests(TestCase):
 
     def setUp(self):
         """Set up data for tests"""
+        self.x = [0, 1, 1, 0]
         self.data = pd.DataFrame(
             {
-                'x': [0, 1, 2, 3],
+                'PID': self.x,
                 'y': [2, 3, 4, 5]
             }
         )
@@ -90,4 +91,11 @@ class BaseDataTests(TestCase):
             Base = BaseData.from_object(self.data)
             fp_save = os.path.join(tmp, "test_save.csv")
             Base.to_file(fp_save)
-            assert os.path.exists(fp_save)
+            self.assertTrue(os.path.exists(fp_save))
+
+    def test_log_record_count(self):
+        """Ensure log_record_count returns log"""
+        Base_object = BaseData.from_object(self.data)
+        with self.assertLogs('caproj.data.base', level='INFO') as logmsg:
+            Base_object.log_record_count(id_col='PID')
+            self.assertTrue(len(logmsg) > 0)
