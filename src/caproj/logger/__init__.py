@@ -3,6 +3,15 @@ caproj.logger
 ~~~~~~~~~~~~~
 
 This module handles setup of logging configuration for ``caproj`` package
+
+**Module functions:**
+
+.. autosummary::
+
+   logfunc
+   setup_logging
+
+|
 """
 
 import functools
@@ -71,10 +80,27 @@ def logfunc(orig_func=None, log=None,
     functions or methods to provide logging functionality to log details
     of the decorated function
 
-    :param orig_func:
-    :param log:
-    :param func:
-    :arg:
+    :param orig_func: NoneType placeholder parameter
+    :param log: logging.getLogger object for logging, default is None
+    :param funcname: boolean indicating whether to log name of function,
+                     default is False
+    :param argvals: boolean indicating whether to log function arguments,
+                    default is False
+    :param docdescr: boolean indicating whether to log function docstring
+                     short description, default is False
+    :param runtime: boolean indicating whether to log function execution
+                    runtime in seconds, default is False
+    :return: ``functools.wraps`` wrapper function
+
+    .. note:: All logs are generate at the 'INFO' logging level
+
+    Example::
+
+        log = logging.getLogger(__name__)
+
+        @logfunc(log=log, funcname=True, runtime=True)
+        def some_function(arg1, **kwargs):
+            ...
     """
 
     if not orig_func:
