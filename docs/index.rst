@@ -20,6 +20,7 @@ An investigation into feature engineering and modeling project-change data for l
 
    readme
    introduction
+   modules
    changelog
 
 Indices and tables
