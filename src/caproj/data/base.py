@@ -10,6 +10,12 @@ This module contains the core :mod:`caproj.data` read and write functionality
 
    BaseData
 
+**Module variables:**
+
+.. autosummary::
+
+   log
+
 |
 """
 
@@ -20,8 +26,9 @@ import pandas as pd
 
 from caproj.logger import logfunc
 
-# TODO: move getLogger call inside of ``BaseData`` class
+
 log = logging.getLogger(__name__)
+"""``logging.getLogger`` instance for module"""
 
 
 class BaseData(object):
