@@ -43,8 +43,9 @@ def main(args=None):
 
     Example::
 
-        >>> python -m caproj foo bar
+        >> python -m caproj foo bar
         ['foo', 'bar']
+
     """
     args = parser.parse_args(args=args)
     print(args.names)
