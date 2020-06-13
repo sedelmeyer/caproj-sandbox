@@ -1,5 +1,5 @@
-Modules Documentation
-=====================
+API Reference
+=============
 
 .. contents:: Contents
   :local:
@@ -9,5 +9,17 @@ Modules Documentation
 .. automodule:: caproj.data.base
    :members:
 
+.. automodule:: caproj.features
+   :members:
+
+.. automodule:: caproj.models
+   :members:
+
+.. automodule:: caproj.visualizations
+   :members:
+
 .. automodule:: caproj.logger
+   :members:
+
+.. automodule:: caproj.cli
    :members:
