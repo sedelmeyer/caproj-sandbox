@@ -1,4 +1,7 @@
 """
+caproj.visualizations
+~~~~~~~~~~~~~~~~~~~~~
+
 This module contains functions for visualizing data and model results
 
 FUNCTIONS

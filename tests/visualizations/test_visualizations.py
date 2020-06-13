@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from caproj import visualization as vis
+from caproj import visualizations as vis
 
 
 class TestPlots(TestCase):
@@ -39,7 +39,7 @@ class TestPlots(TestCase):
     def test_plot_barplot(self):
         """Test plot_barplot function shows plot without error"""
         data = self.data['x'].value_counts()
-        with mock.patch("caproj.visualization.plt.show") as show_patch:
+        with mock.patch("caproj.visualizations.plt.show") as show_patch:
             vis.plot_barplot(value_counts=data, title='test')
             self.assertTrue(show_patch.called)
 
