@@ -17,6 +17,14 @@ cause problems: the code will get executed twice:
 
 * Also see (1) from http://click.pocoo.org/5/setuptools/#setuptools-integration
 
+
+**Module functions:**
+
+.. autosummary::
+
+   main
+
+|
 """
 import argparse
 
@@ -27,5 +35,16 @@ parser.add_argument('names', metavar='NAME', nargs=argparse.ZERO_OR_MORE,
 
 
 def main(args=None):
+    """Placeholder function for testing and to illustrate ``caproj`` cli
+
+    Prints list of input arguments
+
+    :param args: ``str`` or ``NoneType``, default is ``None``
+
+    Example::
+
+        >>> python -m caproj foo bar
+        ['foo', 'bar']
+    """
     args = parser.parse_args(args=args)
     print(args.names)
