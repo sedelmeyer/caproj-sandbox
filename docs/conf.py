@@ -96,7 +96,9 @@ html_theme_options = {
     'github_user': 'sedelmeyer',
     'github_repo': 'nyc-capital-projects',
     'fixed_sidebar': 'false',
-    'description': 'An exploratory analysis experimenting with different approaches to feature engineering and modeling of NYC capital projects.',
+    'description': 'An exploratory analysis experimenting with different '
+                   'approaches to feature engineering and modeling of NYC '
+                   'capital projects.',
     'badge_branch': 'master',
     'github_banner': 'true',
     'github_button': 'true',
