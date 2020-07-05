@@ -2,14 +2,13 @@
 caproj.logger
 ~~~~~~~~~~~~~
 
-This module handles setup of logging configuration for ``caproj`` package
+This module contains logging-related features for the ``caproj`` package
 
 **Module functions:**
 
 .. autosummary::
-
    logfunc
-   setup_logging
+   start_logging
 
 |
 """
@@ -23,13 +22,12 @@ import sys
 import time
 
 
-def setup_logging(
+def start_logging(
     default_path='logging.json',
     default_level='INFO',
     env_key='LOG_CFG'
 ):
-    """Set up logging configuration for ``caproj`` package
-
+    """Set up logging configuration for ``{{cookiecutter.package_name}}`` package
     :param default_path: string file path for json formatted
                          logging configuration file (default is
                          'logging.json')
@@ -75,11 +73,13 @@ def logfunc(orig_func=None, log=None,
             funcname=False, argvals=False,
             docdescr=False, runtime=False):
     """Wrap function call to provide log information when function is called
-
     This function acts as a ``functools.wraps`` decorator for decorating
     functions or methods to provide logging functionality to log details
     of the decorated function
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
     :param orig_func: NoneType placeholder parameter
     :param log: logging.getLogger object for logging, default is None
     :param funcname: boolean indicating whether to log name of function,
@@ -91,6 +91,7 @@ def logfunc(orig_func=None, log=None,
     :param runtime: boolean indicating whether to log function execution
                     runtime in seconds, default is False
     :return: ``functools.wraps`` wrapper function
+<<<<<<< HEAD
 
     .. note:: All logs are generate at the 'INFO' logging level
 
@@ -98,6 +99,11 @@ def logfunc(orig_func=None, log=None,
 
         log = logging.getLogger(__name__)
 
+=======
+    .. note:: All logs are generate at the 'INFO' logging level
+    Example::
+        log = logging.getLogger(__name__)
+>>>>>>> develop
         @logfunc(log=log, funcname=True, runtime=True)
         def some_function(arg1, **kwargs):
             ...

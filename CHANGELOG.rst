@@ -12,11 +12,13 @@ Future releases
 v0.1.0 (Future Release)
 -------------------
 
-* Add data cleansing pipeline as ``data`` submodules
-* Add basic EDA plotting functions to ``visualization`` submodules
+* Add tox automated tests for ``py36``, ``py37``, ``py38``, ``docs``, ``linter``
+* Add GitHub Actions CI test matrix
 
 .. todo::
 
+    * Add data cleansing pipeline as ``data`` submodules
+    * Add basic EDA plotting functions to ``visualization`` submodules
     * Add ``datetime`` and other type-handling to ``BaseData``
     * Create ``data.clean`` mixin class
         * Identify missing data

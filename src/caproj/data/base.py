@@ -104,7 +104,7 @@ class BaseData(object):
             try:
                 if isinstance(input_object.df, pd.DataFrame):
                     input_df = input_object.df.copy()
-            except:
+            except Exception:
                 raise TypeError(
                     'input_object must be either pandas.DataFrame or '
                     'class object with input_object.df attribute of type '

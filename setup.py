@@ -27,9 +27,12 @@ setup(
     name='nyc-capital-projects',
     version='0.0.0',
     license='MIT license',
-    description='An exploratory analysis experimenting with different approaches to feature engineering and modeling of NYC capital projects.',
+    description='An exploratory analysis experimenting with different '
+                'approaches to feature engineering and modeling of NYC '
+                'capital projects.',
     long_description='%s\n%s' % (
-        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
+        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S)
+        .sub('', read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
     author='Michael Sedelmeyer',
@@ -41,7 +44,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     classifiers=[
-        # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
+        # complete classifier list:
+        # http://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
