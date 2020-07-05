@@ -8,6 +8,7 @@ pytest = "*"
 pytest-cov = "*"
 flake8 = "*"
 sphinx = "*"
+tox = "*"
 
 [packages]
 caproj = {editable = true,path = "."}
