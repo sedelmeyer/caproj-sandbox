@@ -99,3 +99,39 @@ class BaseDataTests(TestCase):
         with self.assertLogs('caproj.data.base', level='INFO') as logmsg:
             Base_object.log_record_count(id_col='PID')
             self.assertTrue(len(logmsg) > 0)
+
+    def test_lint_colnames(self):
+        """Ensure lint_colnames fixes column name strings"""
+        raise NotImplementedError
+
+    def test_lint_colnames_log(self):
+        """Ensure lint_colnames method logging works"""
+        raise NotImplementedError
+
+    def test_rename_columns_only_specified(self):
+        """Ensure rename_columns only renames specified columns"""
+        raise NotImplementedError
+
+    def test_rename_columns_json(self):
+        """Ensure rename_columns converts json input to dict"""
+        raise NotImplementedError
+
+    def test_rename_columns_dict(self):
+        """Ensure rename_columns maps names using dict as input"""
+        raise NotImplementedError
+
+    def test_rename_columns_log(self):
+        """Ensure rename_columns logging works"""
+        raise NotImplementedError
+
+    def test_set_dtypes_json(self):
+        """Ensure set_dtypes converts json input to dict"""
+        raise NotImplementedError
+
+    def test_set_dtypes_dict(self):
+        """Ensure set_dtypes converts column dtypes using dict as input"""
+        raise NotImplementedError
+
+    def test_set_dtypes_log(self):
+        """Ensure set_dtypes logging works"""
+        raise NotImplementedError
