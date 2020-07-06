@@ -82,7 +82,7 @@ class BaseDataTests(TestCase):
         class InvalidClass(object):
             pass
         Invalid_object = InvalidClass()
-        with self.assertRaises(TypeError):
+        with self.assertRaises(Exception):
             BaseData.from_object(Invalid_object)
 
     def test_to_file(self):

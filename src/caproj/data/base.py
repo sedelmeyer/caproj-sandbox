@@ -93,9 +93,9 @@ class BaseData(object):
         :param input_object: object to be read into ``BaseData``
         :param copy_input: bool to specify whether self.input_df persists
         :return: pandas.DataFrame and copy_input bool as class variables
-        :raise TypeError: if the ``input_object`` is neither a
-                          pandas.Dataframe nor a ``BaseData`` object with an
-                          existing ``BaseData.df`` attribute
+        :raise Exceptions: if the ``input_object`` is neither a
+                           pandas.Dataframe nor a ``BaseData`` object with an
+                           existing ``BaseData.df`` attribute
 
         """
         if isinstance(input_object, pd.DataFrame):
@@ -105,11 +105,12 @@ class BaseData(object):
                 if isinstance(input_object.df, pd.DataFrame):
                     input_df = input_object.df.copy()
             except Exception:
-                raise TypeError(
+                log.exception(
                     'input_object must be either pandas.DataFrame or '
                     'class object with input_object.df attribute of type '
                     'pandas.DataFrame.'
                 )
+                raise
         return cls(input_df, copy_input)
 
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
