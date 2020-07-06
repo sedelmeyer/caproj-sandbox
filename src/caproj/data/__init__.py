@@ -8,6 +8,7 @@ mixin classes and ``BaseData`` functionality.
 from .base import BaseData
 
 Mixins = []
+"""List of ``mixin`` classes inherited by the :class:`BaseData` class"""
 
 
 class BaseDataOps(*Mixins, BaseData):
