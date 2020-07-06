@@ -132,3 +132,22 @@ class BaseData(object):
         log.info(
             'Number of unique projects in dataset: {}'.format(self.df[id_col].nunique())
         )
+
+    def lint_colnames(self):
+        # TODO:
+        # - add logging
+
+        self.df.columns = [
+            col.strip().replace(' ', '_').replace('-', '_')
+            for col in self.df.columns
+        ]
+
+    def rename_columns(self):
+        raise NotImplementedError
+
+    def set_dtypes(self):
+        raise NotImplementedError
+
+    def sort_records(self):
+        raise NotImplementedError
+
