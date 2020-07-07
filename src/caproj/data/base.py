@@ -58,7 +58,17 @@ class BaseData(object):
             self.input_df = input_df.copy()  # input df persists for reference
         self.df = input_df  # all basedata changes applied to this df
         self.log = logging.getLogger(self.__class__.__name__)
-        self.log_record_count()
+
+        try:
+            self.log_record_count()
+        except Exception as error:
+            self.log.exception(
+                "During __init__ of {} class, unable to log record count with "
+                "exception: {}".format(
+                    self.__class__.__name__,
+                    error
+                )
+            )
 
     @classmethod
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
@@ -120,7 +130,6 @@ class BaseData(object):
         :param target_filename: str filename to which csv should be written
         :param to_csv_kwargs: optional args to pandas.DataFrame.to_csv()
         """
-        # TODO: to_file saves will need trigger log file in future versions
         self.df.to_csv(target_filename, index=False, **to_csv_kwargs)
 
     def log_record_count(self, id_col="PID"):
@@ -162,8 +171,6 @@ class BaseData(object):
             )
         else:
             self.log.info("No column names changed")
-
-        self.log.info(self.__class__.__name__)
 
     def rename_columns(self):
         raise NotImplementedError
