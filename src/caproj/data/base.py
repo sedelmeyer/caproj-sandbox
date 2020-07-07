@@ -26,7 +26,6 @@ import pandas as pd
 
 from caproj.logger import logfunc
 
-
 log = logging.getLogger(__name__)
 """``logging.getLogger`` instance for module"""
 
@@ -58,6 +57,7 @@ class BaseData(object):
         if copy_input:
             self.input_df = input_df.copy()  # input df persists for reference
         self.df = input_df  # all basedata changes applied to this df
+        self.log = logging.getLogger(self.__class__.__name__)
         self.log_record_count()
 
     @classmethod
@@ -73,16 +73,16 @@ class BaseData(object):
         :raise TypeError: if the ``filename`` is not a .csv filetype
         """
         _, ext = os.path.splitext(filename)
-        if ext == '.csv':
+        if ext == ".csv":
             input_df = pd.read_csv(filename, **read_kwargs)
         else:
-            raise TypeError(
-                'from_file reads only .csv filetypes'
-            )
+            raise TypeError("from_file reads only .csv filetypes")
         return cls(input_df, copy_input)
 
     @classmethod
-    @logfunc(log=log, funcname=True, docdescr=True, argvals=False, runtime=False)
+    @logfunc(
+        log=log, funcname=True, docdescr=True, argvals=False, runtime=False
+    )
     def from_object(cls, input_object, copy_input=False):
         """Invoke BaseData and read dataframe from in-memory object
 
@@ -106,9 +106,9 @@ class BaseData(object):
                     input_df = input_object.df.copy()
             except Exception:
                 log.exception(
-                    'input_object must be either pandas.DataFrame or '
-                    'class object with input_object.df attribute of type '
-                    'pandas.DataFrame.'
+                    "input_object must be either pandas.DataFrame or "
+                    "class object with input_object.df attribute of type "
+                    "pandas.DataFrame."
                 )
                 raise
         return cls(input_df, copy_input)
@@ -123,24 +123,47 @@ class BaseData(object):
         # TODO: to_file saves will need trigger log file in future versions
         self.df.to_csv(target_filename, index=False, **to_csv_kwargs)
 
-    def log_record_count(self, id_col='PID'):
+    def log_record_count(self, id_col="PID"):
         """Log number of records and unique projects in `BaseData.df`
         """
-        log.info(
-            'Number of project change records: {}'.format(len(self.df))
+        self.log.info(
+            "Number of project change records: {}".format(len(self.df))
         )
-        log.info(
-            'Number of unique projects in dataset: {}'.format(self.df[id_col].nunique())
+        self.log.info(
+            "Number of unique projects in dataset: {}".format(
+                self.df[id_col].nunique()
+            )
         )
 
+    @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
     def lint_colnames(self):
-        # TODO:
-        # - add logging
+        """Normalize column name format using underscore as a separator
+        """
+        orig_colnames = self.df.columns
 
-        self.df.columns = [
-            col.strip().replace(' ', '_').replace('-', '_')
-            for col in self.df.columns
+        new_colnames = [
+            col.strip().replace(" ", "_").replace("-", "_")
+            for col in orig_colnames
         ]
+
+        self.df.columns = new_colnames
+
+        changed_colnames = [
+            (orig_col, new_col)
+            for orig_col, new_col in zip(orig_colnames, new_colnames)
+            if orig_col != new_col
+        ]
+
+        if len(changed_colnames) > 0:
+            self.log.info(
+                "Column names changed (original, new): {}".format(
+                    changed_colnames
+                )
+            )
+        else:
+            self.log.info("No column names changed")
+
+        self.log.info(self.__class__.__name__)
 
     def rename_columns(self):
         raise NotImplementedError
@@ -150,4 +173,3 @@ class BaseData(object):
 
     def sort_records(self):
         raise NotImplementedError
-
