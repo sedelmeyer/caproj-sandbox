@@ -18,7 +18,7 @@ This module contains the core :mod:`caproj.data` read and write functionality
 
 |
 """
-
+import json
 import logging
 import os
 
@@ -64,10 +64,7 @@ class BaseData(object):
         except Exception as error:
             self.log.exception(
                 "During __init__ of {} class, unable to log record count with "
-                "exception: {}".format(
-                    self.__class__.__name__,
-                    error
-                )
+                "exception: {}".format(self.__class__.__name__, error)
             )
 
     @classmethod
@@ -170,14 +167,53 @@ class BaseData(object):
         else:
             self.log.info("No column names changed")
 
+    def _read_json(self, filepath):
+        """Read json file to dictionary object
+
+        :param filepath: file path to json file
+        :type filepath: str
+        :return: dictionary object read from json file, if filepath exists
+        :rtype: dict
+        """
+        if os.path.exists(filepath):
+            with open(filepath, "rt") as f:
+                json_dict = json.load(f)
+            return json_dict
+        else:
+            self.log.warning(
+                "JSON filepath {} does not exist. No data loaded.".format(
+                    filepath
+                )
+            )
+
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
-    def rename_columns(self, map_dict):
+    def rename_columns(self, map_dict=None, json_path=None):
         """Map existing column names to new names based on input dictionary
 
         A simple wrapper for the pandas ``DataFrame.rename`` method
 
         :param map_dict: column name mapping {current_value: new_value}
         """
+        if map_dict:
+            self.log.info(
+                "Column names mapped using direct map_dict input option"
+            )
+        elif json_path:
+            map_dict = self._read_json(filepath=json_path)
+            if map_dict:
+                self.log.info("Column names mapped using {}".format(json_path))
+            else:
+                self.log.info(
+                    "JSON failed to load map_dict, no column names changed"
+                )
+                return
+        else:
+            self.log.warning(
+                "Neither a map_dict nor json_path was specified, as a result no"
+                "column names were changed"
+            )
+            return
+
         self.df.rename(columns=map_dict, inplace=True)
 
     def set_dtypes(self):
