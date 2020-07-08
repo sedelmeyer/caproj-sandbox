@@ -1,9 +1,11 @@
 """
 Unit tests for caproj.data.base submodule
 """
+import contextlib
+import json
 import os
 from unittest import mock, TestCase
-from tempfile import TemporaryDirectory
+import tempfile
 
 import pandas as pd
 
@@ -26,7 +28,7 @@ class BaseDataIOTests(TestCase):
 
     def test_from_file_csv(self):
         """Ensure csv is read and stored to BaseDataClass class"""
-        with TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, 'test.csv')
             self.data.to_csv(fp, index=False)
             df_read = BaseData.from_file(fp).df
@@ -43,7 +45,7 @@ class BaseDataIOTests(TestCase):
 
     def test_from_file_inputdf_persists(self):
         """Ensure input_df persist only when specified"""
-        with TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, 'test.csv')
             self.data.to_csv(fp, index=False)
             df_read = BaseData.from_file(fp, copy_input=True).input_df
@@ -54,7 +56,7 @@ class BaseDataIOTests(TestCase):
 
     def test_from_file_inputdf_not_created(self):
         """Ensure input_df persist only when specified"""
-        with TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, 'test.csv')
             self.data.to_csv(fp, index=False)
             with self.assertRaises(AttributeError):
@@ -87,7 +89,7 @@ class BaseDataIOTests(TestCase):
 
     def test_to_file(self):
         """Ensure to_file saves self.df to disk"""
-        with TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp:
             Base = BaseData.from_object(self.data)
             fp_save = os.path.join(tmp, "test_save.csv")
             Base.to_file(fp_save)
@@ -114,15 +116,35 @@ class BaseDataReadJsonTests(TestCase):
 
     def setUp(self):
         """Set up data for tests"""
-        pass
+        # define dict for saving to json
+        self.json_dict = {'a': 1, 'b': 2}
+        # initialize BaseData class for use in tests
+        self.Base = BaseData(pd.DataFrame(columns=['PID']), copy_input=False)
+        # use ExitStack for opening a temp directory for use in tests
+        with contextlib.ExitStack() as stack:
+            # open temp directory context manager
+            self.tmpdir = stack.enter_context(
+                tempfile.TemporaryDirectory()
+            )
+            self.filepath = os.path.join(self.tmpdir, 'foo.json')
+            # save json to temp dir
+            with open(self.filepath, 'w') as fp:
+                json.dump(self.json_dict, fp)
+            self.assertTrue(os.path.exists(self.filepath))
+            # ensure context manager closes after tests
+            self.addCleanup(stack.pop_all().close)
 
     def test_read_json(self):
-        """"""
-        raise NotImplementedError
+        """Ensure _read_json returns json dict from file"""
+        read_dict = self.Base._read_json(self.filepath)
+        self.assertDictEqual(self.json_dict, read_dict)
 
-    def test_read_json_no_file_exists(self):
-        """"""
-        raise NotImplementedError
+    def test_read_json_no_file_exists_log(self):
+        """Ensure _read_json returns warning log msg when path doesn't exist"""
+        with self.assertLogs('BaseData', level='WARNING') as logmsg:
+            read_dict = self.Base._read_json('nonexistent path')
+            self.assertEqual(read_dict, None)
+            self.assertTrue("No data loaded" in logmsg.output[0])
 
 
 class BaseDataColLintTests(TestCase):
@@ -164,8 +186,8 @@ class BaseDataColNameTests(TestCase):
 
     def setUp(self):
         """Set up data for tests"""
-        self.orig_colnames = ['a', 'b', 'c', 'd']
-        self.new_colnames = ['1', '2', '3', 'd']
+        self.orig_colnames = ['a', 'b', 'c', 'PID']
+        self.new_colnames = ['1', '2', '3', 'PID']
         self.map_dict = dict(
             zip(self.orig_colnames[:3], self.new_colnames[:3])
         )
@@ -175,7 +197,7 @@ class BaseDataColNameTests(TestCase):
 
     def test_rename_columns_only_specified(self):
         """Ensure rename_columns only renames specified columns"""
-        self.Base.rename_columns(self.map_dict)
+        self.Base.rename_columns(map_dict=self.map_dict)
         print(self.Base.df.columns)
         self.assertListEqual(list(self.Base.df.columns), self.new_colnames)
 
