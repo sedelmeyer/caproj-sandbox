@@ -146,23 +146,21 @@ class BaseData(object):
 
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
     def lint_colnames(self):
-        """Normalize column name format using underscore as a separator
+        """Normalize column name format using underscore ('_') as a separator
         """
         orig_colnames = self.df.columns
-
         new_colnames = [
             col.strip().replace(" ", "_").replace("-", "_")
             for col in orig_colnames
         ]
-
         self.df.columns = new_colnames
 
+        # log changes to colnames
         changed_colnames = [
             (orig_col, new_col)
             for orig_col, new_col in zip(orig_colnames, new_colnames)
             if orig_col != new_col
         ]
-
         if len(changed_colnames) > 0:
             self.log.info(
                 "Column names changed (original, new): {}".format(
@@ -172,8 +170,15 @@ class BaseData(object):
         else:
             self.log.info("No column names changed")
 
-    def rename_columns(self):
-        raise NotImplementedError
+    @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
+    def rename_columns(self, map_dict):
+        """Map existing column names to new names based on input dictionary
+
+        A simple wrapper for the pandas ``DataFrame.rename`` method
+
+        :param map_dict: column name mapping {current_value: new_value}
+        """
+        self.df.rename(columns=map_dict, inplace=True)
 
     def set_dtypes(self):
         raise NotImplementedError
