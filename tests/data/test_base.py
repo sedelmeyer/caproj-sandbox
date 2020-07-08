@@ -109,6 +109,22 @@ class BaseDataIOTests(TestCase):
         raise NotImplementedError
 
 
+class BaseDataReadJsonTests(TestCase):
+    """Tests to ensure ``BaseData`` _read_json method functions properly"""
+
+    def setUp(self):
+        """Set up data for tests"""
+        pass
+
+    def test_read_json(self):
+        """"""
+        raise NotImplementedError
+
+    def test_read_json_no_file_exists(self):
+        """"""
+        raise NotImplementedError
+
+
 class BaseDataColLintTests(TestCase):
     """Tests to ensure ``BaseData`` column linting functions properly"""
 
@@ -164,6 +180,10 @@ class BaseDataColNameTests(TestCase):
         self.assertListEqual(list(self.Base.df.columns), self.new_colnames)
 
     def test_rename_columns_json(self):
+        """Ensure rename_columns converts json input to dict"""
+        raise NotImplementedError
+
+    def test_rename_columns_json_fails_no_file_exists(self):
         """Ensure rename_columns converts json input to dict"""
         raise NotImplementedError
 
