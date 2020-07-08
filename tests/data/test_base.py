@@ -109,8 +109,8 @@ class BaseDataIOTests(TestCase):
         raise NotImplementedError
 
 
-class BaseDataColTests(TestCase):
-    """Tests to ensure caproj.data.BaseData column ops function properly"""
+class BaseDataColLintTests(TestCase):
+    """Tests to ensure ``BaseData`` column linting functions properly"""
 
     def setUp(self):
         """Set up data for tests"""
@@ -142,16 +142,28 @@ class BaseDataColTests(TestCase):
             self.Base_nolint.lint_colnames()
             self.assertTrue("No column names changed" in logmsg.output[0])
 
+
+class BaseDataColNameTests(TestCase):
+    """Tests to ensure ``BaseData`` column renaming function properly"""
+
+    def setUp(self):
+        """Set up data for tests"""
+        self.orig_colnames = ['a', 'b', 'c', 'd']
+        self.new_colnames = ['1', '2', '3', 'd']
+        self.map_dict = dict(
+            zip(self.orig_colnames[:4], self.new_colnames[:4])
+        )
+        self.Base = BaseData(
+            pd.DataFrame(columns=self.orig_colnames), copy_input=False
+        )
+
     def test_rename_columns_only_specified(self):
         """Ensure rename_columns only renames specified columns"""
-        raise NotImplementedError
+        self.Base.rename_columns(self.map_dict)
+        self.assertListEqual(list(self.Base.df.columns), self.new_colnames)
 
     def test_rename_columns_json(self):
         """Ensure rename_columns converts json input to dict"""
-        raise NotImplementedError
-
-    def test_rename_columns_dict(self):
-        """Ensure rename_columns maps names using dict as input"""
         raise NotImplementedError
 
     def test_rename_columns_log(self):
