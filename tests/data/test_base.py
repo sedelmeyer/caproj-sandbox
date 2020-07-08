@@ -151,7 +151,7 @@ class BaseDataColNameTests(TestCase):
         self.orig_colnames = ['a', 'b', 'c', 'd']
         self.new_colnames = ['1', '2', '3', 'd']
         self.map_dict = dict(
-            zip(self.orig_colnames[:4], self.new_colnames[:4])
+            zip(self.orig_colnames[:3], self.new_colnames[:3])
         )
         self.Base = BaseData(
             pd.DataFrame(columns=self.orig_colnames), copy_input=False
@@ -160,6 +160,7 @@ class BaseDataColNameTests(TestCase):
     def test_rename_columns_only_specified(self):
         """Ensure rename_columns only renames specified columns"""
         self.Base.rename_columns(self.map_dict)
+        print(self.Base.df.columns)
         self.assertListEqual(list(self.Base.df.columns), self.new_colnames)
 
     def test_rename_columns_json(self):
