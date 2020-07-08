@@ -2,7 +2,7 @@
 Unit tests for caproj.data.base submodule
 """
 import os
-from unittest import TestCase
+from unittest import mock, TestCase
 from tempfile import TemporaryDirectory
 
 import pandas as pd
@@ -10,8 +10,8 @@ import pandas as pd
 from caproj.data.base import BaseData
 
 
-class BaseDataTests(TestCase):
-    """Tests to ensure class caproj.data.BaseData functions properly"""
+class BaseDataIOTests(TestCase):
+    """Tests to ensure caproj.data.BaseData IO ops function properly"""
 
     def setUp(self):
         """Set up data for tests"""
@@ -96,16 +96,42 @@ class BaseDataTests(TestCase):
     def test_log_record_count(self):
         """Ensure log_record_count returns log"""
         Base_object = BaseData.from_object(self.data)
-        with self.assertLogs('caproj.data.base', level='INFO') as logmsg:
+        with self.assertLogs('BaseData', level='INFO') as logmsg:
             Base_object.log_record_count(id_col='PID')
             self.assertTrue(len(logmsg) > 0)
 
+    def test_log_record_count_init(self):
+        """Ensure BaseData init triggers log_record_count"""
+        raise NotImplementedError
+
+    def test_log_record_count_init_fails(self):
+        """Ensure BaseData init log_record_count fails elegantly"""
+        raise NotImplementedError
+
+
+class BaseDataColTests(TestCase):
+    """Tests to ensure caproj.data.BaseData column ops function properly"""
+
+    def setUp(self):
+        """Set up data for tests"""
+        self.orig_colnames = ['test1', 'test_2', 'test 3', 'test-4']
+        self.linted_colnames = ['test1', 'test_2', 'test_3', 'test_4']
+        self.Base = BaseData(
+            pd.DataFrame(columns=self.orig_colnames), copy_input=False
+        )
+
     def test_lint_colnames(self):
         """Ensure lint_colnames fixes column name strings"""
-        raise NotImplementedError
+        self.Base.lint_colnames()
+        self.assertListEqual(
+            list(self.Base.df.columns), self.linted_colnames
+        )
 
     def test_lint_colnames_log(self):
         """Ensure lint_colnames method logging works"""
+        with self.assertLogs('caproj.data.base', level='INFO') as logmsg:
+            Base_object.log_record_count(id_col='PID')
+            self.assertTrue(len(logmsg) > 0)
         raise NotImplementedError
 
     def test_rename_columns_only_specified(self):
