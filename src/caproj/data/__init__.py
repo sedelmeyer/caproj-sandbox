@@ -17,4 +17,5 @@ class BaseDataOps(*Mixins, BaseData):
     and act as the core data operations class in which methods of
     specialized mixin classes are combined.
     """
+
     pass
