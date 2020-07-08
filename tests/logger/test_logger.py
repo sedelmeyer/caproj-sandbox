@@ -46,8 +46,20 @@ class TestLogFunc(TestCase):
         """Decorated test function for testing logfunc"""
         pass
 
+    @logger.logfunc(
+        log=log, funcname=True, docdescr=True, argvals=True, runtime=True
+    )
+    def test_func_no_docstring(self, **kwargs):
+        pass
+
     def test_logfunc_logs(self):
         """Ensure logfunc provides all logs"""
         with self.assertLogs('test', level='INFO') as logmsg:
             self.test_func(kwarg1='foo', kwarg2='bar')
             self.assertTrue(len(logmsg.output) == 4)
+
+    def test_logfunc_logs_no_docstring(self):
+        """Ensure logfunc provides 'no docstring' log"""
+        with self.assertLogs('test', level='INFO') as logmsg:
+            self.test_func_no_docstring()
+            self.assertTrue("No docstring provided" in logmsg.output[1])
