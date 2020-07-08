@@ -114,7 +114,10 @@ def logfunc(orig_func=None, log=None,
             log.info('Run function {}'.format(orig_func.__name__))
 
         if docdescr:
-            log.info(orig_func.__doc__.partition('\n')[0])
+            try:
+                log.info(orig_func.__doc__.partition('\n')[0])
+            except AttributeError:
+                log.info("No docstring provided")
 
         if argvals:
             log.info(
