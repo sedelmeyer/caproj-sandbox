@@ -119,6 +119,9 @@ class BaseDataColTests(TestCase):
         self.Base = BaseData(
             pd.DataFrame(columns=self.orig_colnames), copy_input=False
         )
+        self.Base_nolint = BaseData(
+            pd.DataFrame(columns=self.linted_colnames), copy_input=False
+        )
 
     def test_lint_colnames(self):
         """Ensure lint_colnames fixes column name strings"""
@@ -127,12 +130,17 @@ class BaseDataColTests(TestCase):
             list(self.Base.df.columns), self.linted_colnames
         )
 
-    def test_lint_colnames_log(self):
+    def test_lint_colnames_log_changed(self):
         """Ensure lint_colnames method logging works"""
-        with self.assertLogs('caproj.data.base', level='INFO') as logmsg:
-            Base_object.log_record_count(id_col='PID')
-            self.assertTrue(len(logmsg) > 0)
-        raise NotImplementedError
+        with self.assertLogs('BaseData', level='INFO') as logmsg:
+            self.Base.lint_colnames()
+            self.assertTrue("Column names changed" in logmsg.output[0])
+
+    def test_lint_colnames_log_not_changed(self):
+        """Ensure lint_colnames method logging works"""
+        with self.assertLogs('BaseData', level='INFO') as logmsg:
+            self.Base_nolint.lint_colnames()
+            self.assertTrue("No column names changed" in logmsg.output[0])
 
     def test_rename_columns_only_specified(self):
         """Ensure rename_columns only renames specified columns"""
