@@ -51,6 +51,8 @@ class BaseData(object):
        BaseData.from_object
        BaseData.to_file
        BaseData.log_record_count
+       BaseData.lint_colnames
+       BaseData.rename_columns
     """
 
     def __init__(self, df_input, copy_input):
@@ -221,8 +223,47 @@ class BaseData(object):
 
         self.df.rename(columns=map_dict, inplace=True)
 
-    def set_dtypes(self):
-        raise NotImplementedError
+    def set_dtypes(self, map_dict=None, json_dict=None, coerce=False):
+        """Map and convert columns to specified data types
+
+        Internally, this function uses the ``pandas`` ``.to_*`` data type
+        conversion methods.
+
+        By default t
+
+        Error handling logs information on values that cannot be converted.
+        """
+        dtype_errors_dict = dict()
+
+        for colname, dtype in map_dict.items():
+            if dtype in ["float", "integer", "unsigned"]:
+                series_ignore = pd.to_numeric(
+                    self.df[colname], downcast=dtype, errors="ignore"
+                )
+                series_coerce = pd.to_numeric(
+                    self.df[colname], downcast=dtype, errors="coerce"
+                )
+            elif dtype == "datetime":
+                series_ignore = pd.to_datetime(
+                    self.df[colname], errors="ignore"
+                )
+                series_coerce = pd.to_datetime(
+                    self.df[colname], errors="coerce"
+                )
+            elif dtype == "timedelta":
+                series_ignore = pd.to_timedelta(
+                    self.df[colname], errors="ignore"
+                )
+                series_coerce = pd.to_timedelta(
+                    self.df[colname], errors="coerce"
+                )
+
+            dtype_errors_dict[colname] = series_ignore[
+                series_ignore != series_coerce
+            ].to_dict()
+
+            self.df[colname] = series_coerce if coerce else series_ignore
+            self.dtype_errors = dtype_errors_dict
 
     def sort_records(self):
         raise NotImplementedError
