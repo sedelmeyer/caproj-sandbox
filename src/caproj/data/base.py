@@ -37,7 +37,7 @@ class BaseData(object):
               from file or from an existing object by using ``BaseData``
               initializing class methods :meth:`BaseData.from_file` or
               :meth:`BaseData.from_object`
-    :cvar input_df: pandas.DataFrame original input copy, not operated
+    :cvar df_input: pandas.DataFrame original input copy, not operated
                     upon by any class methods, and only created if
                     ``copy_input`` parameter set to ``True`` during
                     :meth:`BaseData.from_file` or :meth:`~BaseData.from_object`
@@ -53,10 +53,10 @@ class BaseData(object):
        BaseData.log_record_count
     """
 
-    def __init__(self, input_df, copy_input):
+    def __init__(self, df_input, copy_input):
         if copy_input:
-            self.input_df = input_df.copy()  # input df persists for reference
-        self.df = input_df  # all basedata changes applied to this df
+            self.df_input = df_input.copy()  # input df persists for reference
+        self.df = df_input  # all basedata changes applied to this df
         self.log = logging.getLogger(self.__class__.__name__)
 
         try:
@@ -73,7 +73,7 @@ class BaseData(object):
         """Invoke BaseData class and read csv into pandas.DataFrame
 
         :param filename: str filename of .csv file to be read
-        :param copy_input: bool to specify whether self.input_df persists
+        :param copy_input: bool to specify whether self.df_input persists
         :param read_kwargs: optional args to pandas.DataFrame.read_csv() or
                             pandas.DataFrame.read_excel()
         :return: pandas.DataFrame and copy_input bool as class attributes
@@ -81,10 +81,10 @@ class BaseData(object):
         """
         _, ext = os.path.splitext(filename)
         if ext == ".csv":
-            input_df = pd.read_csv(filename, **read_kwargs)
+            df_input = pd.read_csv(filename, **read_kwargs)
         else:
             raise TypeError("from_file reads only .csv filetypes")
-        return cls(input_df, copy_input)
+        return cls(df_input, copy_input)
 
     @classmethod
     @logfunc(
@@ -98,7 +98,7 @@ class BaseData(object):
         read, or (b) a simple ``pandas.DataFrame`` object.
 
         :param input_object: object to be read into ``BaseData``
-        :param copy_input: bool to specify whether self.input_df persists
+        :param copy_input: bool to specify whether self.df_input persists
         :return: pandas.DataFrame and copy_input bool as class variables
         :raise Exceptions: if the ``input_object`` is neither a
                            pandas.Dataframe nor a ``BaseData`` object with an
@@ -106,11 +106,11 @@ class BaseData(object):
 
         """
         if isinstance(input_object, pd.DataFrame):
-            input_df = input_object.copy()
+            df_input = input_object.copy()
         else:
             try:
                 if isinstance(input_object.df, pd.DataFrame):
-                    input_df = input_object.df.copy()
+                    df_input = input_object.df.copy()
             except Exception:
                 log.exception(
                     "input_object must be either pandas.DataFrame or "
@@ -118,7 +118,7 @@ class BaseData(object):
                     "pandas.DataFrame."
                 )
                 raise
-        return cls(input_df, copy_input)
+        return cls(df_input, copy_input)
 
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
     def to_file(self, target_filename, **to_csv_kwargs):
@@ -192,7 +192,12 @@ class BaseData(object):
 
         A simple wrapper for the pandas ``DataFrame.rename`` method
 
-        :param map_dict: column name mapping {current_value: new_value}
+        :param map_dict: column name mapping {current_value: new_value},
+                         defaults to None
+        :type map_dict: dict, optional
+        :param json_path: file path to json file storing the desired map_dict,
+                          defaults to None
+        :type json_path: str, optional
         """
         if map_dict:
             self.log.info(
@@ -210,7 +215,7 @@ class BaseData(object):
         else:
             self.log.warning(
                 "Neither a map_dict nor json_path was specified, as a result no"
-                "column names were changed"
+                " column names were changed"
             )
             return
 

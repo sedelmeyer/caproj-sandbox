@@ -44,23 +44,23 @@ class BaseDataIOTests(TestCase):
             BaseData.from_file(fp)
 
     def test_from_file_inputdf_persists(self):
-        """Ensure input_df persist only when specified"""
+        """Ensure df_input persist only when specified"""
         with tempfile.TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, 'test.csv')
             self.data.to_csv(fp, index=False)
-            df_read = BaseData.from_file(fp, copy_input=True).input_df
+            df_read = BaseData.from_file(fp, copy_input=True).df_input
             self.assertEqual(
                 pd.testing.assert_frame_equal(self.data, df_read),
                 None,
             )
 
     def test_from_file_inputdf_not_created(self):
-        """Ensure input_df persist only when specified"""
+        """Ensure df_input persist only when specified"""
         with tempfile.TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, 'test.csv')
             self.data.to_csv(fp, index=False)
             with self.assertRaises(AttributeError):
-                BaseData.from_file(fp).input_df
+                BaseData.from_file(fp).df_input
 
     def test_from_object_df(self):
         """Ensure dataframe object is read and stored to BaseDataClass class"""
