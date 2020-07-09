@@ -198,20 +198,40 @@ class BaseDataColNameTests(TestCase):
     def test_rename_columns_only_specified(self):
         """Ensure rename_columns only renames specified columns"""
         self.Base.rename_columns(map_dict=self.map_dict)
-        print(self.Base.df.columns)
         self.assertListEqual(list(self.Base.df.columns), self.new_colnames)
 
     def test_rename_columns_json(self):
-        """Ensure rename_columns converts json input to dict"""
-        raise NotImplementedError
+        """Ensure rename_columns renames columns using json dict"""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            filepath = os.path.join(tmpdir, 'foo.json')
+            with open(filepath, 'w') as fp:
+                json.dump(self.map_dict, fp)
+            with self.assertLogs('BaseData', level='INFO') as logmsg:
+                self.Base.rename_columns(json_path=filepath)
+                self.assertListEqual(
+                    list(self.Base.df.columns), self.new_colnames
+                )
+                self.assertTrue('Column names mapped' in logmsg.output[0])
 
     def test_rename_columns_json_fails_no_file_exists(self):
-        """Ensure rename_columns converts json input to dict"""
-        raise NotImplementedError
+        """Ensure rename_columns fails elegantly when json does not exist"""
+        with self.assertLogs('BaseData', level='INFO') as logmsg:
+            self.Base.rename_columns(json_path='nonexistent path')
+            self.assertListEqual(
+                list(self.Base.df.columns), self.orig_colnames
+            )
+            self.assertTrue('JSON failed' in ''.join(logmsg.output))
 
     def test_rename_columns_log(self):
         """Ensure rename_columns logging works"""
-        raise NotImplementedError
+        with self.assertLogs('BaseData', level='INFO') as logmsg:
+            self.Base.rename_columns()
+            self.assertListEqual(
+                list(self.Base.df.columns), self.orig_colnames
+            )
+            self.assertTrue(
+                'Neither a map_dict nor json_path' in ''.join(logmsg.output)
+            )
 
     def test_set_dtypes_json(self):
         """Ensure set_dtypes converts json input to dict"""
