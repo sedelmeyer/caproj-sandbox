@@ -91,13 +91,16 @@ def logfunc(orig_func=None, log=None,
                     runtime in seconds, default is False
     :return: ``functools.wraps`` wrapper function
 
-    .. note:: All logs are generate at the 'INFO' logging level
+    :Example:
 
-    Example::
-        log = logging.getLogger(__name__)
-        @logfunc(log=log, funcname=True, runtime=True)
-        def some_function(arg1, **kwargs):
-            ...
+    >>> log = logging.getLogger(__name__)
+
+    >>> @logfunc(log=log, funcname=True, runtime=True)
+    >>> def some_function(arg1, **kwargs):
+    >>>     ...
+
+    .. note:: All ``logfunc`` logs are generate at the 'INFO' logging level
+
     """
 
     if not orig_func:
