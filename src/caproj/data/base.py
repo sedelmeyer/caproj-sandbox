@@ -21,6 +21,7 @@ This module contains the core :mod:`caproj.data` read and write functionality
 import json
 import logging
 import os
+from typing import Any
 
 import pandas as pd
 
@@ -236,13 +237,17 @@ class BaseData(object):
         dtype_errors_dict = dict()
 
         for colname, dtype in map_dict.items():
-            if dtype in ["float", "integer", "unsigned"]:
+
+            invalid_dtype = False
+
+            if dtype in ["float", "integer", "signed", "unsigned"]:
                 series_ignore = pd.to_numeric(
                     self.df[colname], downcast=dtype, errors="ignore"
                 )
                 series_coerce = pd.to_numeric(
                     self.df[colname], downcast=dtype, errors="coerce"
                 )
+
             elif dtype == "datetime":
                 series_ignore = pd.to_datetime(
                     self.df[colname], errors="ignore"
@@ -250,6 +255,7 @@ class BaseData(object):
                 series_coerce = pd.to_datetime(
                     self.df[colname], errors="coerce"
                 )
+
             elif dtype == "timedelta":
                 series_ignore = pd.to_timedelta(
                     self.df[colname], errors="ignore"
@@ -258,12 +264,48 @@ class BaseData(object):
                     self.df[colname], errors="coerce"
                 )
 
-            dtype_errors_dict[colname] = series_ignore[
-                series_ignore != series_coerce
-            ].to_dict()
+            elif dtype == "string":
+                series_ignore = self.df[colname].copy().astype("str")
+                series_coerce = self.df[colname].copy().astype("str")
+
+            else:
+                invalid_dtype = True
+
+            if not invalid_dtype:
+                dtype_errors_dict[colname] = series_ignore[
+                    series_ignore != series_coerce
+                ].to_dict()
+                self.log.info(
+                    "column '{0}' dtype conversion to '{1}' encountered {2}".format(
+                        colname,
+                        dtype,
+                        "no errors"
+                        if len(dtype_errors_dict[colname]) == 0
+                        else "the following errors: {}".format(
+                            dtype_errors_dict[colname]
+                        ),
+                    )
+                )
+            else:
+                dtype_errors_dict[
+                    colname
+                ] = f"'{dtype}' dtype is not a valid input"
+                self.log.info(
+                    f"'{colname}' dtype not converted: {dtype_errors_dict[colname]}"
+                )
 
             self.df[colname] = series_coerce if coerce else series_ignore
             self.dtype_errors = dtype_errors_dict
 
-    def sort_records(self):
+    def sort_records(self, cheese: Any) -> list:
+        """[summary]
+
+        [extended_summary]
+
+        :param cheese: [description]
+        :type cheese: Any
+        :raises NotImplementedError: [description]
+        :return: [description]
+        :rtype: list
+        """
         raise NotImplementedError
