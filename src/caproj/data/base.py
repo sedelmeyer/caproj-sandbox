@@ -224,7 +224,41 @@ class BaseData(object):
 
         self.df.rename(columns=map_dict, inplace=True)
 
-    def set_dtypes(self, map_dict=None, json_dict=None, coerce=False):
+    def _map_dict_json(
+        self, map_dict=None, json_path=None, log_text="Column names"
+    ):
+        if map_dict:
+            self.log.info(
+                "{} mapped using direct map_dict input option".format(
+                    log_text.capitalize()
+                )
+            )
+        elif json_path:
+            map_dict = self._read_json(filepath=json_path)
+            if map_dict:
+                self.log.info(
+                    "{} mapped using {}".format(
+                        log_text.capitalize(), json_path
+                    )
+                )
+            else:
+                self.log.info(
+                    "JSON failed to load map_dict, no {} changed".format(
+                        log_text.lower()
+                    )
+                )
+                return
+        else:
+            self.log.warning(
+                "Neither a map_dict nor json_path was specified, as a result no "
+                "{} were changed".format(log_text.lower())
+            )
+            return
+
+        return map_dict
+
+    @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
+    def set_dtypes(self, map_dict=None, json_path=None, coerce=False):
         """Map and convert columns to specified data types
 
         Internally, this function uses the ``pandas`` ``.to_*`` data type
@@ -234,6 +268,12 @@ class BaseData(object):
 
         Error handling logs information on values that cannot be converted.
         """
+        map_dict = self._map_dict_json(
+            map_dict=map_dict, json_path=json_path, log_text="column dtypes"
+        )
+        if not map_dict:
+            return
+
         dtype_errors_dict = dict()
 
         for colname, dtype in map_dict.items():
@@ -253,14 +293,6 @@ class BaseData(object):
                     self.df[colname], errors="ignore"
                 )
                 series_coerce = pd.to_datetime(
-                    self.df[colname], errors="coerce"
-                )
-
-            elif dtype == "timedelta":
-                series_ignore = pd.to_timedelta(
-                    self.df[colname], errors="ignore"
-                )
-                series_coerce = pd.to_timedelta(
                     self.df[colname], errors="coerce"
                 )
 
