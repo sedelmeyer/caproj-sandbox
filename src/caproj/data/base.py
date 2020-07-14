@@ -279,6 +279,11 @@ class BaseData(object):
         if not map_dict:
             return
 
+        if coerce:
+            self.log.warning(
+                "All dtype conversion error values will be deleted and left blank"
+            )
+
         dtype_errors_dict = dict()
 
         for colname, dtype in map_dict.items():
@@ -337,15 +342,5 @@ class BaseData(object):
             self.df[colname] = series_coerce if coerce else series_ignore
             self.dtype_errors = dtype_errors_dict
 
-    def sort_records(self, cheese: Any) -> list:
-        """[summary]
-
-        [extended_summary]
-
-        :param cheese: [description]
-        :type cheese: Any
-        :raises NotImplementedError: [description]
-        :return: [description]
-        :rtype: list
-        """
+    def sort_records(self):
         raise NotImplementedError
