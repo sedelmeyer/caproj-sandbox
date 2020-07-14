@@ -110,7 +110,7 @@ class BaseDataReadJsonTests(TestCase):
     def setUp(self):
         """Set up data for tests"""
         # define dict for saving to json
-        self.json_dict = {"a": 1, "b": 2}
+        self.json_dict = self.map_dict = {"a": 1, "b": 2}
         # initialize BaseData class for use in tests
         self.Base = BaseData(pd.DataFrame(columns=["PID"]), copy_input=False)
         # use ExitStack for opening a temp directory for use in tests
@@ -136,6 +136,24 @@ class BaseDataReadJsonTests(TestCase):
             read_dict = self.Base._read_json("nonexistent path")
             self.assertEqual(read_dict, None)
             self.assertTrue("No data loaded" in logmsg.output[0])
+
+    def test_map_dict_json_return_input_dict(self):
+        raise NotImplementedError
+
+    def test_map_dict_json_log_input_dict(self):
+        raise NotImplementedError
+
+    def test_map_dict_json_return_input_json(self):
+        raise NotImplementedError
+
+    def test_map_dict_json_log_input_json(self):
+        raise NotImplementedError
+
+    def test_map_dict_json_fail_input_json(self):
+        raise NotImplementedError
+
+    def test_map_dict_json_log_neither_dict_nor_json(self):
+        raise NotImplementedError
 
 
 class BaseDataColLintTests(TestCase):
@@ -228,13 +246,28 @@ class BaseDataColDtypeTests(TestCase):
             "c": [1, 2, "2020-01-01"],
             "PID": ["test", "test", "test"],
         }
-        self.map_dict = dict(zip(self.orig_colnames[:3], self.new_colnames[:3]))
+        self.map_dict = {
+            "a": "integer",
+            "b": "float",
+            "c": "datetime",
+            "PID": "unsigned",
+        }
         self.Base = BaseData(
             pd.DataFrame().from_dict(self.colvalues_dict), copy_input=False
         )
 
     def test_set_dtypes_json(self):
         """Ensure set_dtypes converts json input to dict"""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            filepath = os.path.join(tmpdir, "foo.json")
+            with open(filepath, "w") as fp:
+                json.dump(self.map_dict, fp)
+            with self.assertLogs("BaseData", level="INFO") as logmsg:
+                self.Base.rename_columns(json_path=filepath)
+                self.assertListEqual(
+                    list(self.Base.df.columns), self.new_colnames
+                )
+                self.assertTrue("Column names mapped" in logmsg.output[0])
         raise NotImplementedError
 
     def test_set_dtypes_dict(self):
