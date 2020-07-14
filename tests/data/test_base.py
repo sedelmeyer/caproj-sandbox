@@ -289,6 +289,12 @@ class BaseDataColDtypeTests(TestCase):
             pd.DataFrame().from_dict(self.colvalues_dict), copy_input=False
         )
 
+    def test_set_dtypes_dict_failure(self):
+        """Ensure set_dtypes fails to set dtype_errors when no map_dict returned"""
+        self.Base.set_dtypes(json_path="nonexistent path")
+        with self.assertRaises(AttributeError):
+            self.dtype_errors
+
     def test_set_dtypes_json(self):
         """Ensure set_dtypes converts json input to dict"""
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -329,9 +335,6 @@ class BaseDataColDtypeTests(TestCase):
         raise NotImplementedError
 
     def test_set_dtypes_log_changes(self):
-        raise NotImplementedError
-
-    def test_set_dtypes_log_no_change(self):
         raise NotImplementedError
 
     def test_set_dtypes_error_dict_stored(self):
