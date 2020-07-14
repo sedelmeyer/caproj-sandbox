@@ -54,6 +54,7 @@ class BaseData(object):
        BaseData.log_record_count
        BaseData.lint_colnames
        BaseData.rename_columns
+       BaseData.set_dtypes
     """
 
     def __init__(self, df_input, copy_input):
@@ -189,44 +190,22 @@ class BaseData(object):
                 )
             )
 
-    @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
-    def rename_columns(self, map_dict=None, json_path=None):
-        """Map existing column names to new names based on input dictionary
-
-        A simple wrapper for the pandas ``DataFrame.rename`` method
-
-        :param map_dict: column name mapping {current_value: new_value},
-                         defaults to None
-        :type map_dict: dict, optional
-        :param json_path: file path to json file storing the desired map_dict,
-                          defaults to None
-        :type json_path: str, optional
-        """
-        if map_dict:
-            self.log.info(
-                "Column names mapped using direct map_dict input option"
-            )
-        elif json_path:
-            map_dict = self._read_json(filepath=json_path)
-            if map_dict:
-                self.log.info("Column names mapped using {}".format(json_path))
-            else:
-                self.log.info(
-                    "JSON failed to load map_dict, no column names changed"
-                )
-                return
-        else:
-            self.log.warning(
-                "Neither a map_dict nor json_path was specified, as a result no"
-                " column names were changed"
-            )
-            return
-
-        self.df.rename(columns=map_dict, inplace=True)
-
     def _map_dict_json(
         self, map_dict=None, json_path=None, log_text="Column names"
     ):
+        """Handle and log dictionary source for higher-level methods
+
+        [extended_summary]
+
+        :param map_dict: [description], defaults to None
+        :type map_dict: [type], optional
+        :param json_path: [description], defaults to None
+        :type json_path: [type], optional
+        :param log_text: [description], defaults to "Column names"
+        :type log_text: str, optional
+        :return: [description]
+        :rtype: [type]
+        """
         if map_dict:
             self.log.info(
                 "{} mapped using direct map_dict input option".format(
@@ -258,15 +237,41 @@ class BaseData(object):
         return map_dict
 
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
+    def rename_columns(self, map_dict=None, json_path=None):
+        """Map existing column names to new names based on input dictionary
+
+        A simple wrapper for the pandas ``DataFrame.rename`` method
+
+        :param map_dict: column name mapping {current_value: new_value},
+                         defaults to None
+        :type map_dict: dict, optional
+        :param json_path: file path to json file storing the desired map_dict,
+                          defaults to None
+        :type json_path: str, optional
+        """
+        map_dict = self._map_dict_json(
+            map_dict=map_dict, json_path=json_path, log_text="column names"
+        )
+        if not map_dict:
+            return
+
+        self.df.rename(columns=map_dict, inplace=True)
+
+    @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
     def set_dtypes(self, map_dict=None, json_path=None, coerce=False):
         """Map and convert columns to specified data types
 
         Internally, this function uses the ``pandas`` ``.to_*`` data type
         conversion methods.
 
-        By default t
-
         Error handling logs information on values that cannot be converted.
+
+        :param map_dict: [description], defaults to None
+        :type map_dict: [type], optional
+        :param json_path: [description], defaults to None
+        :type json_path: [type], optional
+        :param coerce: [description], defaults to False
+        :type coerce: bool, optional
         """
         map_dict = self._map_dict_json(
             map_dict=map_dict, json_path=json_path, log_text="column dtypes"
@@ -313,17 +318,20 @@ class BaseData(object):
                         dtype,
                         "no errors"
                         if len(dtype_errors_dict[colname]) == 0
-                        else "the following errors: {}".format(
-                            dtype_errors_dict[colname]
+                        else "the following {} errors: {}".format(
+                            len(dtype_errors_dict[colname]),
+                            dtype_errors_dict[colname],
                         ),
                     )
                 )
             else:
                 dtype_errors_dict[
                     colname
-                ] = f"'{dtype}' dtype is not a valid input"
+                ] = "'{}' dtype is not a valid input".format(dtype)
                 self.log.info(
-                    f"'{colname}' dtype not converted: {dtype_errors_dict[colname]}"
+                    "'{}' dtype not converted: {}".format(
+                        colname, dtype_errors_dict[colname]
+                    )
                 )
 
             self.df[colname] = series_coerce if coerce else series_ignore
