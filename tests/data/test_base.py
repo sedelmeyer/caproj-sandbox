@@ -222,6 +222,8 @@ class BaseDataColLintTests(TestCase):
 class BaseDataColNameTests(TestCase):
     """Tests to ensure ``BaseData`` column renaming function properly"""
 
+    # TODO: Refactor to remove _map_dict_json logic from rename_columns tests
+
     def setUp(self):
         """Set up data for tests"""
         self.orig_colnames = ["a", "b", "c", "PID"]
@@ -305,6 +307,38 @@ class BaseDataColDtypeTests(TestCase):
         """Ensure set_dtypes converts column dtypes using dict as input"""
         raise NotImplementedError
 
-    def test_set_dtypes_log(self):
-        """Ensure set_dtypes logging works"""
+    def test_set_dtypes_invalid_map_dict_input(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_to_numeric_values(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_to_datetime_values(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_to_string_values(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_invalid_dtype_values(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_coerce_log(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_log_no_change(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_log_changes(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_log_no_change(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_error_dict_stored(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_ignore_changes_df(self):
+        raise NotImplementedError
+
+    def test_set_dtypes_coerce_changes_df(self):
         raise NotImplementedError
