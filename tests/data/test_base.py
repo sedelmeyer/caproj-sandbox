@@ -104,7 +104,7 @@ class BaseDataIOTests(TestCase):
         raise NotImplementedError
 
 
-class BaseDataReadJsonTests(TestCase):
+class BaseDataReadJsonMapDictTests(TestCase):
     """Tests to ensure ``BaseData`` _read_json method functions properly"""
 
     def setUp(self):
@@ -145,8 +145,10 @@ class BaseDataReadJsonTests(TestCase):
     def test_map_dict_json_log_input_dict(self):
         """Ensure _map_dict_json logs input map_dict action"""
         with self.assertLogs("BaseData", level="INFO") as logmsg:
-            _ = self.Base._map_dict_json(map_dict=self.map_dict)
-            self.assertTrue("map_dict" in logmsg.output[0])
+            _ = self.Base._map_dict_json(
+                map_dict=self.map_dict, log_text="test"
+            )
+            self.assertTrue("map_dict" and "test" in logmsg.output[0].lower())
 
     def test_map_dict_json_return_input_json(self):
         """Ensure _map_dict_json reads json and returns map_dict"""
@@ -156,14 +158,33 @@ class BaseDataReadJsonTests(TestCase):
     def test_map_dict_json_log_input_json(self):
         """Ensure _map_dict_json logs json input action"""
         with self.assertLogs("BaseData", level="INFO") as logmsg:
-            _ = self.Base._map_dict_json(json_path=self.filepath)
-            self.assertTrue(self.filepath in logmsg.output[0])
+            _ = self.Base._map_dict_json(
+                json_path=self.filepath, log_text="test"
+            )
+            self.assertTrue(
+                self.filepath and "test" in logmsg.output[0].lower()
+            )
 
     def test_map_dict_json_fail_input_json(self):
-        raise NotImplementedError
+        """Ensure _map_dict_json fails elegantly with nonexistent json path"""
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            return_dict = self.Base._map_dict_json(
+                json_path="nonexistent path", log_text="test"
+            )
+            self.assertEqual(return_dict, None)
+            self.assertTrue("JSON failed" and "test" in "".join(logmsg.output))
 
     def test_map_dict_json_log_neither_dict_nor_json(self):
-        raise NotImplementedError
+        """Ensure _map_dict_json logs when neither map_dict nor json given"""
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            return_dict = self.Base._map_dict_json(
+                map_dict=None, json_path=None, log_text="test"
+            )
+            self.assertEqual(return_dict, None)
+            self.assertTrue(
+                "Neither a map_dict nor json_path"
+                and "test" in "".join(logmsg.output)
+            )
 
 
 class BaseDataColLintTests(TestCase):
