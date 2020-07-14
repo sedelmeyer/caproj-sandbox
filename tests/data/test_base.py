@@ -149,10 +149,15 @@ class BaseDataReadJsonTests(TestCase):
             self.assertTrue("map_dict" in logmsg.output[0])
 
     def test_map_dict_json_return_input_json(self):
-        raise NotImplementedError
+        """Ensure _map_dict_json reads json and returns map_dict"""
+        return_dict = self.Base._map_dict_json(json_path=self.filepath)
+        self.assertDictEqual(return_dict, self.json_dict)
 
     def test_map_dict_json_log_input_json(self):
-        raise NotImplementedError
+        """Ensure _map_dict_json logs json input action"""
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            _ = self.Base._map_dict_json(json_path=self.filepath)
+            self.assertTrue(self.filepath in logmsg.output[0])
 
     def test_map_dict_json_fail_input_json(self):
         raise NotImplementedError
