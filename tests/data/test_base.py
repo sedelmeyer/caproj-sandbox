@@ -348,10 +348,19 @@ class BaseDataColDtypeTests(TestCase):
             )
 
     def test_set_dtypes_coerce_log(self):
-        raise NotImplementedError
+        """Ensure set_dtype 'coerce' option generates special log"""
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            self.Base.set_dtypes(map_dict={"a": "integer"}, coerce=True)
+            self.assertTrue(
+                "All dtype conversion error values will be deleted and left blank"
+                in "".join(logmsg.output)
+            )
 
-    def test_set_dtypes_log_no_change(self):
-        raise NotImplementedError
+    def test_set_dtypes_log_no_errors(self):
+        """Ensure set_dtype 'coerce' option generates special log"""
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            self.Base.set_dtypes(map_dict={"a": "string"})
+            self.assertTrue("encountered no errors" in "".join(logmsg.output))
 
     def test_set_dtypes_log_changes(self):
         raise NotImplementedError
