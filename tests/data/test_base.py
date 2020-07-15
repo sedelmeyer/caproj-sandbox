@@ -340,8 +340,12 @@ class BaseDataColDtypeTests(TestCase):
             self.assertTrue(isinstance(val, str))
 
     def test_set_dtypes_invalid_dtype_values(self):
-
-        raise NotImplementedError
+        """Ensure set_dtype invalid dtype logic works"""
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            self.Base.set_dtypes(map_dict={"a": "invalid dtype"})
+            self.assertTrue(
+                "dtype is not a valid input" in "".join(logmsg.output)
+            )
 
     def test_set_dtypes_coerce_log(self):
         raise NotImplementedError

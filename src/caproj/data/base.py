@@ -329,6 +329,7 @@ class BaseData(object):
                         ),
                     )
                 )
+                self.df[colname] = series_coerce if coerce else series_ignore
             else:
                 dtype_errors_dict[
                     colname
@@ -339,8 +340,7 @@ class BaseData(object):
                     )
                 )
 
-            self.df[colname] = series_coerce if coerce else series_ignore
-            self.dtype_errors = dtype_errors_dict
+        self.dtype_errors = dtype_errors_dict
 
     def sort_records(self):
         raise NotImplementedError
