@@ -316,16 +316,31 @@ class BaseDataColDtypeTests(TestCase):
     def test_set_dtypes_invalid_map_dict_input(self):
         raise NotImplementedError
 
-    def test_set_dtypes_to_numeric_values(self):
-        raise NotImplementedError
+    def test_set_dtypes_to_numeric_int_values(self):
+        """Ensure set_dtype 'integer' dtype logic works"""
+        for dtype in ["integer", "signed", "unsigned"]:
+            self.Base.set_dtypes(map_dict={"a": dtype})
+            for val in self.Base.df["a"]:
+                self.assertTrue(isinstance(val, int))
+
+    def test_set_dtypes_to_numeric_float_values(self):
+        """Ensure set_dtype 'float' dtype logic works"""
+        self.Base.set_dtypes(map_dict={"a": "float"})
+        for val in self.Base.df["a"]:
+            self.assertTrue(isinstance(val, float))
 
     def test_set_dtypes_to_datetime_values(self):
+        # TODO: use mock to determine whether pandas.to_datetime is called with 'datetime' input
         raise NotImplementedError
 
     def test_set_dtypes_to_string_values(self):
-        raise NotImplementedError
+        """Ensure set_dtype 'string' dtype logic works"""
+        self.Base.set_dtypes(map_dict={"b": "string"})
+        for val in self.Base.df["b"]:
+            self.assertTrue(isinstance(val, str))
 
     def test_set_dtypes_invalid_dtype_values(self):
+
         raise NotImplementedError
 
     def test_set_dtypes_coerce_log(self):
