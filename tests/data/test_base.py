@@ -286,6 +286,7 @@ class BaseDataColDtypeTests(TestCase):
             "c": "datetime",
             "PID": "unsigned",
         }
+        self.expected_error_counts = [0, 1, 0, 3]
         self.Base = BaseData(
             pd.DataFrame().from_dict(self.colvalues_dict), copy_input=False
         )
@@ -368,8 +369,17 @@ class BaseDataColDtypeTests(TestCase):
             self.Base.set_dtypes(map_dict={"a": "string"})
             self.assertTrue("encountered no errors" in "".join(logmsg.output))
 
-    def test_set_dtypes_log_changes(self):
-        raise NotImplementedError
+    def test_set_dtypes_log_change_errors(self):
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            self.Base.set_dtypes(map_dict=self.map_dict)
+            for (col, dtype), num in zip(
+                self.map_dict.items(), self.expected_error_counts
+            ):
+                print(f"{col}, {dtype}, {num}")
+                is_log = "'{0}' dtype conversion to '{1}' encountered {2} errors".format(
+                    col, dtype, "no" if num == 0 else num
+                )
+                self.assertTrue(is_log in "".join(logmsg.output))
 
     def test_set_dtypes_ignore_changes_df(self):
         raise NotImplementedError
