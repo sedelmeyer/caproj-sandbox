@@ -310,12 +310,14 @@ class BaseDataColDtypeTests(TestCase):
                 )
                 self.assertTrue("dtype conversion" in log_output)
 
-    def test_set_dtypes_dict(self):
-        """Ensure set_dtypes converts column dtypes using dict as input"""
-        raise NotImplementedError
-
-    def test_set_dtypes_invalid_map_dict_input(self):
-        raise NotImplementedError
+    def test_set_dtypes_error_dict_stored(self):
+        """Ensure set_dtypes stores dtype_errors dict as attribute"""
+        self.Base.set_dtypes(map_dict=self.map_dict)
+        self.assertTrue(hasattr(self.Base, "dtype_errors"))
+        self.assertListEqual(
+            list(self.colvalues_dict.keys()),
+            list(self.Base.dtype_errors.keys()),
+        )
 
     def test_set_dtypes_to_numeric_int_values(self):
         """Ensure set_dtype 'integer' dtype logic works"""
@@ -367,9 +369,6 @@ class BaseDataColDtypeTests(TestCase):
             self.assertTrue("encountered no errors" in "".join(logmsg.output))
 
     def test_set_dtypes_log_changes(self):
-        raise NotImplementedError
-
-    def test_set_dtypes_error_dict_stored(self):
         raise NotImplementedError
 
     def test_set_dtypes_ignore_changes_df(self):
