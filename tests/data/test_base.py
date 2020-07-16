@@ -8,6 +8,7 @@ from unittest import mock, TestCase
 import tempfile
 
 import pandas as pd
+import numpy as np
 
 from caproj.data.base import BaseData
 
@@ -302,12 +303,12 @@ class BaseDataColDtypeTests(TestCase):
             with open(filepath, "w") as fp:
                 json.dump(self.map_dict, fp)
             with self.assertLogs("BaseData", level="INFO") as logmsg:
-                self.Base.rename_columns(json_path=filepath)
-                self.assertListEqual(
-                    list(self.Base.df.columns), self.new_colnames
+                self.Base.set_dtypes(json_path=filepath)
+                log_output = "".join(logmsg.output)
+                self.assertTrue(
+                    "mapped using {}".format(filepath) in log_output
                 )
-                self.assertTrue("Column names mapped" in logmsg.output[0])
-        raise NotImplementedError
+                self.assertTrue("dtype conversion" in log_output)
 
     def test_set_dtypes_dict(self):
         """Ensure set_dtypes converts column dtypes using dict as input"""
@@ -330,8 +331,11 @@ class BaseDataColDtypeTests(TestCase):
             self.assertTrue(isinstance(val, float))
 
     def test_set_dtypes_to_datetime_values(self):
-        # TODO: use mock to determine whether pandas.to_datetime is called with 'datetime' input
-        raise NotImplementedError
+        """Ensure set_dtype 'datetime' dtype logic works"""
+        self.Base.set_dtypes(map_dict={"c": "datetime"})
+        self.assertTrue(
+            np.datetime64 in [type(val) for val in self.Base.df["c"].values]
+        )
 
     def test_set_dtypes_to_string_values(self):
         """Ensure set_dtype 'string' dtype logic works"""
