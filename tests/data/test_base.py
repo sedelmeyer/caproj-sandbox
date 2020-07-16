@@ -291,6 +291,18 @@ class BaseDataColDtypeTests(TestCase):
             pd.DataFrame().from_dict(self.colvalues_dict), copy_input=False
         )
 
+    def test_to_datetime_ignore(self):
+        """"""
+        series_ignore, _ = self.Base._to_datetime(colname="c")
+        self.assertTrue(1 and 2 in series_ignore.values)
+
+    def test_to_datetime_coerce(self):
+        """"""
+        _, series_coerce = self.Base._to_datetime(colname="c")
+        self.assertEqual(sum(series_coerce.isnull()), 2)
+        for val in series_coerce.values:
+            self.assertTrue(isinstance(val, np.datetime64))
+
     def test_set_dtypes_dict_failure(self):
         """Ensure set_dtypes fails to set dtype_errors when no map_dict returned"""
         self.Base.set_dtypes(json_path="nonexistent path")
@@ -372,6 +384,7 @@ class BaseDataColDtypeTests(TestCase):
     def test_set_dtypes_log_change_errors(self):
         with self.assertLogs("BaseData", level="INFO") as logmsg:
             self.Base.set_dtypes(map_dict=self.map_dict)
+            print(self.Base.df)
             for (col, dtype), num in zip(
                 self.map_dict.items(), self.expected_error_counts
             ):

@@ -323,7 +323,7 @@ class BaseData(object):
                         dtype,
                         "no errors"
                         if len(dtype_errors_dict[colname]) == 0
-                        else "the following {} errors: {}".format(
+                        else "{} errors: {}".format(
                             len(dtype_errors_dict[colname]),
                             dtype_errors_dict[colname],
                         ),
@@ -341,6 +341,24 @@ class BaseData(object):
                 )
 
         self.dtype_errors = dtype_errors_dict
+
+    def _stringify_datetime_col(self):
+        """Force datetime column to strings to prevent invalid number conversions"""
+        # TODO:
+        # 1. return stringified version of datetime column
+        raise NotImplementedError
+
+    def _to_datetime(self, colname):
+        """Convert column to datetime while protecting against numeric conversions"""
+        # TODO:
+        # 1. Generate stringified version of column
+        # 2. Coerce to_datetime for string version of col
+        # 3. Create second version of to_datetime where NaT values are replaced with original pre-strigified values
+        # 4. return both versions of converted as series_ignore and series_convert
+        string_series = self.df[colname].copy().astype(str)
+        series_coerce = pd.to_datetime(string_series, errors="coerce")
+        series_ignore = series_coerce.fillna(self.df[colname].copy())
+        return series_ignore, series_coerce
 
     def sort_records(self):
         raise NotImplementedError
