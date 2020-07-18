@@ -20,9 +20,11 @@ This module contains the core :mod:`caproj.data` read and write functionality
 """
 import json
 import logging
+import math
 import os
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
 from caproj.logger import logfunc
@@ -299,12 +301,18 @@ class BaseData(object):
                 )
 
             elif dtype == "datetime":
-                series_ignore = pd.to_datetime(
-                    self.df[colname], errors="ignore"
+                # datetime is particularly challenging for the desired behavior
+                # as a result, the dtype_errors and conversions are handled
+                # in a separate function
+                series_ignore, series_coerce, dict_errors = self._to_datetime(
+                    colname
                 )
-                series_coerce = pd.to_datetime(
-                    self.df[colname], errors="coerce"
-                )
+                # series_ignore = pd.to_datetime(
+                #     self.df[colname], errors="ignore"
+                # )
+                # series_coerce = pd.to_datetime(
+                #     self.df[colname], errors="coerce"
+                # )
 
             elif dtype == "string":
                 series_ignore = self.df[colname].copy().astype("str")
@@ -314,9 +322,14 @@ class BaseData(object):
                 invalid_dtype = True
 
             if not invalid_dtype:
-                dtype_errors_dict[colname] = series_ignore[
-                    series_ignore != series_coerce
-                ].to_dict()
+                if dtype == "datetime":
+                    dtype_errors_dict[colname] = dict_errors
+                    print(series_ignore.astype(str))
+                    print(series_coerce.astype(str))
+                else:
+                    dtype_errors_dict[colname] = series_ignore[
+                        series_ignore != series_coerce
+                    ].to_dict()
                 self.log.info(
                     "column '{0}' dtype conversion to '{1}' encountered {2}".format(
                         colname,
@@ -358,7 +371,13 @@ class BaseData(object):
         string_series = self.df[colname].copy().astype(str)
         series_coerce = pd.to_datetime(string_series, errors="coerce")
         series_ignore = series_coerce.fillna(self.df[colname].copy())
-        return series_ignore, series_coerce
+        dict_errors = series_ignore[
+            string_series != series_coerce.astype(str)
+        ].to_dict()
+        dict_errors = {
+            key: val for key, val in dict_errors.items() if not math.isnan(val)
+        }
+        return series_ignore, series_coerce, dict_errors
 
     def sort_records(self):
         raise NotImplementedError

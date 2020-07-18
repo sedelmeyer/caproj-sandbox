@@ -3,6 +3,7 @@ Unit tests for caproj.data.base submodule
 """
 import contextlib
 import json
+import math
 import os
 from unittest import mock, TestCase
 import tempfile
@@ -286,22 +287,39 @@ class BaseDataColDtypeTests(TestCase):
             "c": "datetime",
             "PID": "unsigned",
         }
-        self.expected_error_counts = [0, 1, 0, 3]
+        self.expected_error_counts = [0, 1, 2, 3]
         self.Base = BaseData(
             pd.DataFrame().from_dict(self.colvalues_dict), copy_input=False
         )
 
     def test_to_datetime_ignore(self):
-        """"""
-        series_ignore, _ = self.Base._to_datetime(colname="c")
+        """Ensure _to_datetime generates ignore series with expected behavior"""
+        series_ignore, _, _ = self.Base._to_datetime(colname="c")
         self.assertTrue(1 and 2 in series_ignore.values)
 
     def test_to_datetime_coerce(self):
-        """"""
-        _, series_coerce = self.Base._to_datetime(colname="c")
+        """Ensure _to_datetime generates coerced series values"""
+        _, series_coerce, _ = self.Base._to_datetime(colname="c")
         self.assertEqual(sum(series_coerce.isnull()), 2)
         for val in series_coerce.values:
             self.assertTrue(isinstance(val, np.datetime64))
+
+    def test_to_datetime_errors(self):
+        """Ensure _to_datetime returns error dict of correct length"""
+        _, _, error_dict = self.Base._to_datetime(colname="c")
+        self.assertEqual(len(error_dict), 2)
+
+    def test_to_datetime_errors_no_nan(self):
+        """Ensure _to_datetime does not included NaN values in error_dict"""
+        Base = BaseData(
+            pd.DataFrame().from_dict({"c": [1, np.nan, "2020-01-01"]}),
+            copy_input=False,
+        )
+        _, _, error_dict = Base._to_datetime(colname="c")
+        print(error_dict)
+        self.assertEqual(len(error_dict), 1)
+        for val in error_dict.values():
+            self.assertFalse(math.isnan(val))
 
     def test_set_dtypes_dict_failure(self):
         """Ensure set_dtypes fails to set dtype_errors when no map_dict returned"""
@@ -345,9 +363,9 @@ class BaseDataColDtypeTests(TestCase):
         for val in self.Base.df["a"]:
             self.assertTrue(isinstance(val, float))
 
-    def test_set_dtypes_to_datetime_values(self):
+    def test_set_dtypes_to_datetime_values_coerced(self):
         """Ensure set_dtype 'datetime' dtype logic works"""
-        self.Base.set_dtypes(map_dict={"c": "datetime"})
+        self.Base.set_dtypes(map_dict={"c": "datetime"}, coerce=True)
         self.assertTrue(
             np.datetime64 in [type(val) for val in self.Base.df["c"].values]
         )
@@ -392,6 +410,8 @@ class BaseDataColDtypeTests(TestCase):
                 is_log = "'{0}' dtype conversion to '{1}' encountered {2} errors".format(
                     col, dtype, "no" if num == 0 else num
                 )
+                print(is_log)
+                print(logmsg.output)
                 self.assertTrue(is_log in "".join(logmsg.output))
 
     def test_set_dtypes_ignore_changes_df(self):
