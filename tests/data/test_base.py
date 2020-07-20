@@ -416,11 +416,15 @@ class BaseDataColDtypeTests(TestCase):
 
     def test_set_dtypes_ignore_changes_df(self):
         """Ensure resulting dataframe has no NaN values if coerce set to False"""
-        raise NotImplementedError
+        self.Base.set_dtypes(map_dict=self.map_dict, coerce=False)
+        self.assertListEqual([1, 2, "test"], list(self.Base.df["b"].values))
 
     def test_set_dtypes_coerce_changes_df(self):
         """Ensure resulting dataframe has NaN values if coerce set to True"""
-        raise NotImplementedError
+        self.Base.set_dtypes(map_dict=self.map_dict, coerce=True)
+        self.assertTrue(
+            True in [math.isnan(val) for val in list(self.Base.df["b"])]
+        )
 
 
 class BaseDataSortRecordsTests(TestCase):
