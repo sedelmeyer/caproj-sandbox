@@ -22,9 +22,7 @@ import json
 import logging
 import math
 import os
-from typing import Any
 
-import numpy as np
 import pandas as pd
 
 from caproj.logger import logfunc
@@ -369,23 +367,27 @@ class BaseData(object):
         return series_ignore, series_coerce, dict_errors
 
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
-    def sort_records(
+    def sort_values(
         self, by, ascending=True, na_position="last", ignore_index=False
     ):
         """Sort dataframe records by specified columns
 
         A simple implementation of the Pandas ``sort_values`` method. This operation
-        is performed inplace on the ``BaseData.df`` stored attribute.
+        is performed in place on the ``BaseData.df`` stored attribute. Therefore,
+        no objects are returned.
 
-        :param by: [description]
-        :type by: [type]
-        :param ascending: [description], defaults to True
-        :type ascending: bool, optional
-        :param na_position: [description], defaults to 'last'
-        :type na_position: str, optional
-        :param ignore_index: [description], defaults to False
+        :param by: Name or list of names to sort by.
+        :type by: str or list of str
+        :param ascending: Sort ascending vs. descending. Specify list for multiple
+                          sort orders. If this is a list of bools, must match the
+                          length of the by, defaults to True
+        :type ascending: bool or list of bool, optional
+        :param na_position: Puts NaNs at the beginning if first; last puts NaNs at
+                            the end, defaults to 'last'
+        :type na_position: {‘first’, ‘last’}, optional
+        :param ignore_index: If True, the resulting axis will be labeled 0, 1, …,
+                             n - 1; defaults to False
         :type ignore_index: bool, optional
-        :raises NotImplementedError: [description]
         """
         self.df.sort_values(
             by=by,
