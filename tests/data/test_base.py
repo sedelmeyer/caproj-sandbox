@@ -429,23 +429,27 @@ class BaseDataSortRecordsTests(TestCase):
     def setUp(self):
         """Set up data for tests"""
         self.colvalues_dict = {
-            "a": ["1", "2", "3"],
-            "b": [1, 2, "test"],
-            "c": [1, 2, "2020-01-01"],
-            "PID": ["test", "test", "test"],
+            "a": [3, 2, 1],
+            "PID": [3, 2, 1],
         }
         self.Base = BaseData(
             pd.DataFrame().from_dict(self.colvalues_dict), copy_input=False
         )
 
-    def test_sort_records_single_column(self):
-        """Ensure sort_records sorts with individual column string as input"""
-        raise NotImplementedError
+    def test_sort_values_single_column(self):
+        """Ensure sort_values sorts with individual column string as input"""
+        self.Base.sort_values(by="a")
+        self.assertListEqual([1, 2, 3], list(self.Base.df["a"].values))
+        self.assertListEqual([1, 2, 3], list(self.Base.df["PID"].values))
 
-    def test_sort_records_multi_column(self):
-        """Ensure sort_records sorts with column name list as input"""
-        raise NotImplementedError
+    def test_sort_values_multi_column(self):
+        """Ensure sort_values sorts with column name list as input"""
+        self.Base.sort_values(by=["PID", "a"])
+        self.assertListEqual([1, 2, 3], list(self.Base.df["a"].values))
+        self.assertListEqual([1, 2, 3], list(self.Base.df["PID"].values))
 
-    def test_sort_records_log(self):
-        """Ensure sort_records generates log as expected"""
-        raise NotImplementedError
+    def test_sort_values_log(self):
+        """Ensure sort_values generates log as expected"""
+        with self.assertLogs("caproj.data.base", level="INFO") as logmsg:
+            self.Base.sort_values(by="PID")
+            self.assertTrue(len(logmsg.output) == 3)
