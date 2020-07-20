@@ -415,7 +415,37 @@ class BaseDataColDtypeTests(TestCase):
                 self.assertTrue(is_log in "".join(logmsg.output))
 
     def test_set_dtypes_ignore_changes_df(self):
+        """Ensure resulting dataframe has no NaN values if coerce set to False"""
         raise NotImplementedError
 
     def test_set_dtypes_coerce_changes_df(self):
+        """Ensure resulting dataframe has NaN values if coerce set to True"""
+        raise NotImplementedError
+
+
+class BaseDataSortRecordsTests(TestCase):
+    """Tests to ensure ``BaseData.sort_records`` functions properly"""
+
+    def setUp(self):
+        """Set up data for tests"""
+        self.colvalues_dict = {
+            "a": ["1", "2", "3"],
+            "b": [1, 2, "test"],
+            "c": [1, 2, "2020-01-01"],
+            "PID": ["test", "test", "test"],
+        }
+        self.Base = BaseData(
+            pd.DataFrame().from_dict(self.colvalues_dict), copy_input=False
+        )
+
+    def test_sort_records_single_column(self):
+        """Ensure sort_records sorts with individual column string as input"""
+        raise NotImplementedError
+
+    def test_sort_records_multi_column(self):
+        """Ensure sort_records sorts with column name list as input"""
+        raise NotImplementedError
+
+    def test_sort_records_log(self):
+        """Ensure sort_records generates log as expected"""
         raise NotImplementedError
