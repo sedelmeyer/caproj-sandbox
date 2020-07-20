@@ -266,8 +266,6 @@ class BaseData(object):
         Internally, this function uses the ``pandas`` ``.to_*`` data type
         conversion methods.
 
-        Error handling logs information on values that cannot be converted.
-
         :param map_dict: [description], defaults to None
         :type map_dict: [type], optional
         :param json_path: [description], defaults to None
@@ -301,18 +299,12 @@ class BaseData(object):
                 )
 
             elif dtype == "datetime":
-                # datetime is particularly challenging for the desired behavior
-                # as a result, the dtype_errors and conversions are handled
+                # Datetime is particularly challenging for the desired behavior.
+                # As a result, the dtype_errors and conversions are handled
                 # in a separate function
                 series_ignore, series_coerce, dict_errors = self._to_datetime(
                     colname
                 )
-                # series_ignore = pd.to_datetime(
-                #     self.df[colname], errors="ignore"
-                # )
-                # series_coerce = pd.to_datetime(
-                #     self.df[colname], errors="coerce"
-                # )
 
             elif dtype == "string":
                 series_ignore = self.df[colname].copy().astype("str")
@@ -324,8 +316,6 @@ class BaseData(object):
             if not invalid_dtype:
                 if dtype == "datetime":
                     dtype_errors_dict[colname] = dict_errors
-                    print(series_ignore.astype(str))
-                    print(series_coerce.astype(str))
                 else:
                     dtype_errors_dict[colname] = series_ignore[
                         series_ignore != series_coerce
@@ -355,19 +345,18 @@ class BaseData(object):
 
         self.dtype_errors = dtype_errors_dict
 
-    def _stringify_datetime_col(self):
-        """Force datetime column to strings to prevent invalid number conversions"""
-        # TODO:
-        # 1. return stringified version of datetime column
-        raise NotImplementedError
-
     def _to_datetime(self, colname):
-        """Convert column to datetime while protecting against numeric conversions"""
-        # TODO:
-        # 1. Generate stringified version of column
-        # 2. Coerce to_datetime for string version of col
-        # 3. Create second version of to_datetime where NaT values are replaced with original pre-strigified values
-        # 4. return both versions of converted as series_ignore and series_convert
+        """Convert column to datetime while protecting against numeric conversions
+
+        :param colname: Name of column to convert to datetime
+        :type colname: str
+        :return: tuple containing (1) a series of converted datetimes where numeric
+                 values remain unchanged and non-convertable values remain unchanged,
+                 (2) a series of converted datetimes where those values are converted
+                 to NaT, and (3) a dictionary of 'errors' containing the index keys
+                 and values for the values left unchanged
+        :rtype: tuple
+        """
         string_series = self.df[colname].copy().astype(str)
         series_coerce = pd.to_datetime(string_series, errors="coerce")
         series_ignore = series_coerce.fillna(self.df[colname].copy())
@@ -379,5 +368,31 @@ class BaseData(object):
         }
         return series_ignore, series_coerce, dict_errors
 
-    def sort_records(self):
-        raise NotImplementedError
+    @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
+    def sort_records(
+        self, by, ascending=True, na_position="last", ignore_index=False
+    ):
+        """Sort dataframe records by specified columns
+
+        A simple implementation of the Pandas ``sort_values`` method. This operation
+        is performed inplace on the ``BaseData.df`` stored attribute.
+
+        :param by: [description]
+        :type by: [type]
+        :param ascending: [description], defaults to True
+        :type ascending: bool, optional
+        :param na_position: [description], defaults to 'last'
+        :type na_position: str, optional
+        :param ignore_index: [description], defaults to False
+        :type ignore_index: bool, optional
+        :raises NotImplementedError: [description]
+        """
+        self.df.sort_values(
+            by=by,
+            axis=0,
+            ascending=ascending,
+            inplace=True,
+            kind="quicksort",
+            na_position=na_position,
+            ignore_index=ignore_index,
+        )
