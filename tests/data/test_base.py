@@ -5,7 +5,7 @@ import contextlib
 import json
 import math
 import os
-from unittest import mock, TestCase
+import unittest
 import tempfile
 
 import pandas as pd
@@ -14,7 +14,7 @@ import numpy as np
 from caproj.data.base import BaseData
 
 
-class BaseDataIOTests(TestCase):
+class BaseDataIOTests(unittest.TestCase):
     """Tests to ensure caproj.data.BaseData IO ops function properly"""
 
     def setUp(self):
@@ -99,14 +99,23 @@ class BaseDataIOTests(TestCase):
 
     def test_log_record_count_init(self):
         """Ensure BaseData init triggers log_record_count"""
-        raise NotImplementedError
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            BaseData(self.data, copy_input=False)
+            self.assertTrue(
+                "Number of project change records" in "".join(logmsg.output)
+            )
 
     def test_log_record_count_init_fails(self):
         """Ensure BaseData init log_record_count fails elegantly"""
-        raise NotImplementedError
+        with self.assertLogs("BaseData", level="INFO") as logmsg:
+            Base = BaseData(pd.DataFrame(columns=["a", "b"]), copy_input=False)
+            self.assertListEqual(["a", "b"], list(Base.df.columns))
+            self.assertTrue(
+                "unable to log record count" in "".join(logmsg.output)
+            )
 
 
-class BaseDataReadJsonMapDictTests(TestCase):
+class BaseDataReadJsonMapDictTests(unittest.TestCase):
     """Tests to ensure ``BaseData`` _read_json method functions properly"""
 
     def setUp(self):
@@ -189,7 +198,7 @@ class BaseDataReadJsonMapDictTests(TestCase):
             )
 
 
-class BaseDataColLintTests(TestCase):
+class BaseDataColLintTests(unittest.TestCase):
     """Tests to ensure ``BaseData`` column linting functions properly"""
 
     def setUp(self):
@@ -221,7 +230,7 @@ class BaseDataColLintTests(TestCase):
             self.assertTrue("No column names changed" in logmsg.output[0])
 
 
-class BaseDataColNameTests(TestCase):
+class BaseDataColNameTests(unittest.TestCase):
     """Tests to ensure ``BaseData`` column renaming function properly"""
 
     # TODO: Refactor to remove _map_dict_json logic from rename_columns tests
@@ -270,7 +279,7 @@ class BaseDataColNameTests(TestCase):
             )
 
 
-class BaseDataColDtypeTests(TestCase):
+class BaseDataColDtypeTests(unittest.TestCase):
     """Tests to ensure ``BaseData`` column dtype conversion functions properly"""
 
     def setUp(self):
@@ -427,7 +436,7 @@ class BaseDataColDtypeTests(TestCase):
         )
 
 
-class BaseDataSortRecordsTests(TestCase):
+class BaseDataSortRecordsTests(unittest.TestCase):
     """Tests to ensure ``BaseData.sort_records`` functions properly"""
 
     def setUp(self):
