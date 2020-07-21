@@ -6,7 +6,7 @@ This project is an exploratory analysis experimenting with different approaches 
 .. image:: https://travis-ci.com/sedelmeyer/nyc-capital-projects.svg?branch=master
     :target: https://travis-ci.com/sedelmeyer/nyc-capital-projects
 
-.. image:: https://github.com/sedelmeyer/nyc-capital-projects/workflows/CI%20Test%20Matrix/badge.svg?branch=master
+.. image:: https://github.com/sedelmeyer/nyc-capital-projects/workflows/build/badge.svg?branch=master
     :target: https://github.com/sedelmeyer/nyc-capital-projects/actions
 
 .. contents:: Contents
