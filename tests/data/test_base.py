@@ -325,7 +325,6 @@ class BaseDataColDtypeTests(unittest.TestCase):
             copy_input=False,
         )
         _, _, error_dict = Base._to_datetime(colname="c")
-        print(error_dict)
         self.assertEqual(len(error_dict), 1)
         for val in error_dict.values():
             self.assertFalse(math.isnan(val))
@@ -411,16 +410,13 @@ class BaseDataColDtypeTests(unittest.TestCase):
     def test_set_dtypes_log_change_errors(self):
         with self.assertLogs("BaseData", level="INFO") as logmsg:
             self.Base.set_dtypes(map_dict=self.map_dict)
-            print(self.Base.df)
             for (col, dtype), num in zip(
                 self.map_dict.items(), self.expected_error_counts
             ):
-                print(f"{col}, {dtype}, {num}")
-                is_log = "'{0}' dtype conversion to '{1}' encountered {2} errors".format(
-                    col, dtype, "no" if num == 0 else num
+                is_log = (
+                    "'{0}' dtype conversion to '{1}' encountered {2} errors"
+                    "".format(col, dtype, "no" if num == 0 else num)
                 )
-                print(is_log)
-                print(logmsg.output)
                 self.assertTrue(is_log in "".join(logmsg.output))
 
     def test_set_dtypes_ignore_changes_df(self):
