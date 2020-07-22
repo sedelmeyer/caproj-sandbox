@@ -15,7 +15,7 @@ from caproj.data.clean import CleanMixin
 
 
 class CleanMixinTests(unittest.TestCase):
-    """Tests to ensure caproj.data.BaseData IO ops function properly"""
+    """Tests to ensure caproj.data.CleanMixin methods function properly"""
 
     def setUp(self):
         """Set up data for tests"""
@@ -25,16 +25,19 @@ class CleanMixinTests(unittest.TestCase):
         }
         self.Base = CleanMixin()
         self.Base.df = pd.DataFrame().from_dict(self.colvalues_dict)
-        )
 
     def test_remove_missing_records_single_col(self):
         """Ensure remove_missing_records works with single column input string"""
-        raise NotImplementedError
+        self.Base.remove_missing_records(columns="a")
+        self.assertEqual(len(self.Base.df), 2)
 
     def test_remove_missing_records_multi_col(self):
         """Ensure remove_missing_records works with multi-column input list"""
-        raise NotImplementedError
+        self.Base.remove_missing_records(columns=["a", "PID"])
+        self.assertEqual(len(self.Base.df), 1)
 
     def test_remove_missing_records_log(self):
         """Ensure remove_missing_records generates log"""
-        raise NotImplementedError
+        with self.assertLogs("caproj.data.clean", level="INFO") as logmsg:
+            self.Base.remove_missing_records(columns="a")
+            self.assertTrue(len(logmsg.output) == 3)
