@@ -43,31 +43,46 @@ class CleanMixinTests(unittest.TestCase):
             self.assertTrue(len(logmsg.output) == 3)
 
 
-class MakeIdTests(unittest.TestCase):
-    """Tests to ensure CleanMixin make_record_keys method function properly"""
+class ConcatValuesTests(unittest.TestCase):
+    """Tests to ensure CleanMixin concat_values method function properly"""
 
     def setUp(self):
         """Set up data for tests"""
         self.colvalues_dict = {
             "a": [1, 2, 3],
-            "a": [1, 2, np.nan],
+            "b": [1, 2, np.nan],
             "PID": ["test", "test", "test"],
         }
+        self.to_colname = "test"
         self.Base = CleanMixin()
         self.Base.df = pd.DataFrame().from_dict(self.colvalues_dict)
 
-    def test_make_record_keys_numbers_concat(self):
-        """Ensure make_record_keys concatenates numeric values instead of adds"""
-        raise NotImplementedError
+    def test_concat_values_numbers_concat(self):
+        """Ensure concat_values concatenates numeric values instead of adds"""
+        self.Base.concat_values(columns=["a", "b"], to_colname=self.to_colname)
+        self.assertListEqual(
+            list(self.Base.df[self.to_colname].values), ["11.0", "22.0", "3nan"]
+        )
 
-    def test_make_record_keys_single_col(self):
-        """Ensure make_record_keys works with single column input string"""
-        raise NotImplementedError
+    def test_concat_values_single_col(self):
+        """Ensure concat_values works with single column input string"""
+        self.Base.concat_values(columns="a", to_colname=self.to_colname)
+        self.assertListEqual(
+            list(self.Base.df[self.to_colname].values), ["1", "2", "3"]
+        )
 
-    def test_make_record_keys_multi_col(self):
-        """Ensure make_record_keys works with multi-column input list"""
-        raise NotImplementedError
+    def test_concat_values_multi_col(self):
+        """Ensure concat_values works with multi-column input list"""
+        self.Base.concat_values(
+            columns=["a", "b", "PID"], to_colname=self.to_colname
+        )
+        self.assertListEqual(
+            list(self.Base.df[self.to_colname].values),
+            ["11.0test", "22.0test", "3nantest"],
+        )
 
-    def test_make_record_keys_log(self):
-        """Ensure make_record_keys generates log"""
-        raise NotImplementedError
+    def test_concat_values_log(self):
+        """Ensure concat_values generates log"""
+        with self.assertLogs("caproj.data.clean", level="INFO") as logmsg:
+            self.Base.concat_values(columns="a", to_colname=self.to_colname)
+            self.assertTrue(len(logmsg.output) == 3)
