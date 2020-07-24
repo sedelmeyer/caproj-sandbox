@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Predicting outcomes for NYC capital projects &#8212; NYC Capital Projects 0.1.dev0 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicting outcomes for NYC capital projects &#8212; caproj-sandbox 0.0.4.dev103+gf175e1f.d20200724 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -13,11 +14,11 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <link rel="canonical" href="https://sedelmeyer.github.io/nyc-capital-projects/index.html" />
+    <link rel="canonical" href="https://sedelmeyer.github.io/caproj-sandbox/index.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="NYC Capital Projects" href="readme.html" />
+    <link rel="next" title="NYC Capital Projects (SANDBOX)" href="readme.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -40,19 +41,22 @@
 <h2>An investigation into feature engineering and modeling project-change data for large-scale capital projects.<a class="headerlink" href="#an-investigation-into-feature-engineering-and-modeling-project-change-data-for-large-scale-capital-projects" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This project is in the early stages of active development. Therefore this site currently contains little more than a starting skeleton with which to document the project and its findings as they are developed.</p>
-<p>Check back later for additional content.</p>
+<p><strong>This project is primarily being constructed for my own personal learning experience, where my current area of focus are approaches to generating tested and log-generating data pipelines. As such:</strong></p>
+<ul class="simple">
+<li><p>Please disregard existing project releases, because they do not adhere to semantic versioning standards.</p>
+<ul>
+<li><p>There is a chance that I may stabilize future releases, but that will be entirely dependent on how long I continue to work on this repository.</p></li>
+</ul>
+</li>
+<li><p>Please also disregard existing project documentation, which is currently not a focus of my current efforts.</p></li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">NYC Capital Projects</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">NYC Capital Projects (SANDBOX)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="readme.html#summary">Summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme.html#analysis-and-findings">Analysis and findings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readme.html#source-code-documentation">Source code documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#replicating-this-analysis">Replicating this analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#adding-to-this-project">Adding to this project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#questions-or-issues-related-to-this-project">Questions or issues related to this project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#sources-and-additional-resources">Sources and additional resources</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
@@ -61,8 +65,22 @@
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#summary-of-findings">Summary of Findings</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#caproj-data">caproj.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#caproj-data-base">caproj.data.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#caproj-data-clean">caproj.data.clean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#caproj-features">caproj.features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#caproj-models">caproj.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#caproj-visualizations">caproj.visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#caproj-logger">caproj.logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#caproj-cli">caproj.cli</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#future-releases">Future releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-0-4-2020-07-24">v0.0.4 (2020-07-24)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-0-3-2020-06-09">v0.0.3 (2020-06-09)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-0-2-2020-05-26">v0.0.2 (2020-05-26)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-0-1-2020-05-25">v0.0.1 (2020-05-25)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-0-0-2020-05-24">v0.0.0 (2020-05-24)</a></li>
 </ul>
@@ -87,7 +105,7 @@
   <nav id="rellinks">
     <ul>
         <li>
-          <a href="readme.html" title="Next document">NYC Capital Projects</a>
+          <a href="readme.html" title="Next document">NYC Capital Projects (SANDBOX)</a>
           &rarr;
         </li>
     </ul>
@@ -102,7 +120,7 @@
   <a href="#">
     <img class="logo" src="_static/logo.png" alt="Logo"/>
     
-    <h1 class="logo logo-name">NYC Capital Projects</h1>
+    <h1 class="logo logo-name">caproj-sandbox</h1>
     
   </a>
 </p>
@@ -115,7 +133,7 @@
 
 
 <p>
-<iframe src="https://ghbtns.com/github-btn.html?user=sedelmeyer&repo=nyc-capital-projects&type=watch&count=true&size=large&v=2"
+<iframe src="https://ghbtns.com/github-btn.html?user=sedelmeyer&repo=caproj-sandbox&type=watch&count=true&size=large&v=2"
   allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
 </p>
 
@@ -123,22 +141,11 @@
 
 
 
-    
-
-<p>
-<a class="badge" href="https://travis-ci.org/sedelmeyer/nyc-capital-projects">
-    <img
-        alt="https://secure.travis-ci.org/sedelmeyer/nyc-capital-projects.svg?branch=master"
-        src="https://secure.travis-ci.org/sedelmeyer/nyc-capital-projects.svg?branch=master"
-    />
-</a>
-</p>
-
-
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">NYC Capital Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">NYC Capital Projects (SANDBOX)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -157,7 +164,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="readme.html" title="next chapter">NYC Capital Projects</a></li>
+      <li>Next: <a href="readme.html" title="next chapter">NYC Capital Projects (SANDBOX)</a></li>
   </ul></li>
 </ul>
 </div>
@@ -187,7 +194,7 @@
       &copy;2019-2020, Michael Sedelmeyer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
@@ -196,7 +203,7 @@
     </div>
 
     
-    <a href="https://github.com/sedelmeyer/nyc-capital-projects" class="github">
+    <a href="https://github.com/sedelmeyer/caproj-sandbox" class="github">
         <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
     </a>
     

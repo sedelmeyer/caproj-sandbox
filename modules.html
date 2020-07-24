@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference &#8212; caproj-sandbox 0.0.4.dev103+gf175e1f.d20200724 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="canonical" href="https://sedelmeyer.github.io/caproj-sandbox/modules.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#caproj-data" id="id3">caproj.data</a></p></li>
+<li><p><a class="reference internal" href="#caproj-data-base" id="id4">caproj.data.base</a></p></li>
+<li><p><a class="reference internal" href="#caproj-data-clean" id="id5">caproj.data.clean</a></p></li>
+<li><p><a class="reference internal" href="#caproj-features" id="id6">caproj.features</a></p></li>
+<li><p><a class="reference internal" href="#caproj-models" id="id7">caproj.models</a></p></li>
+<li><p><a class="reference internal" href="#caproj-visualizations" id="id8">caproj.visualizations</a></p></li>
+<li><p><a class="reference internal" href="#caproj-logger" id="id9">caproj.logger</a></p></li>
+<li><p><a class="reference internal" href="#caproj-cli" id="id10">caproj.cli</a></p></li>
+</ul>
+</div>
+<span class="target" id="module-caproj.data"></span><div class="section" id="caproj-data">
+<h2><a class="toc-backref" href="#contents">caproj.data</a><a class="headerlink" href="#caproj-data" title="Permalink to this headline">¶</a></h2>
+<p>This submodule contains the <code class="docutils literal notranslate"><span class="pre">BaseData</span></code> class, which aggregates <code class="docutils literal notranslate"><span class="pre">caproj.data</span></code>
+mixin classes and <code class="docutils literal notranslate"><span class="pre">BaseDataOps</span></code> class instantiation functionality.</p>
+<dl class="py class">
+<dt id="caproj.data.BaseData">
+<em class="property">class </em><code class="sig-prename descclassname">caproj.data.</code><code class="sig-name descname">BaseData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df_input</span></em>, <em class="sig-param"><span class="n">copy_input</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.BaseData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inherit core class functionality from the <code class="docutils literal notranslate"><span class="pre">BaseDataOps</span></code> parent class
+and act as the core data operations class in which methods of
+specialized mixin classes are combined.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="caproj.data.Mixins">
+<code class="sig-prename descclassname">caproj.data.</code><code class="sig-name descname">Mixins</code><em class="property"> = [&lt;class 'caproj.data.clean.CleanMixin'&gt;]</em><a class="headerlink" href="#caproj.data.Mixins" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of <code class="docutils literal notranslate"><span class="pre">mixin</span></code> classes inherited by the <a class="reference internal" href="#caproj.data.BaseData" title="caproj.data.BaseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseData</span></code></a> class</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-caproj.data.base"></span><div class="section" id="caproj-data-base">
+<h2><a class="toc-backref" href="#contents">caproj.data.base</a><a class="headerlink" href="#caproj-data-base" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the core <a class="reference internal" href="#module-caproj.data" title="caproj.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">caproj.data</span></code></a> read and write functionality</p>
+<p><strong>Module classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.data.base.BaseDataOps" title="caproj.data.base.BaseDataOps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDataOps</span></code></a>(df_input, copy_input)</p></td>
+<td><p>Manage base read/write operations for <a class="reference internal" href="#module-caproj.data" title="caproj.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">caproj.data</span></code></a> module classes</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Module variables:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.data.base.log" title="caproj.data.base.log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code> instance for module</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py class">
+<dt id="caproj.data.base.BaseDataOps">
+<em class="property">class </em><code class="sig-prename descclassname">caproj.data.base.</code><code class="sig-name descname">BaseDataOps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df_input</span></em>, <em class="sig-param"><span class="n">copy_input</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manage base read/write operations for <a class="reference internal" href="#module-caproj.data" title="caproj.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">caproj.data</span></code></a> module classes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – pandas.DataFrame working copy either read in from
+from file or from an existing object by using <code class="docutils literal notranslate"><span class="pre">BaseData</span></code>
+initializing class methods <a class="reference internal" href="#caproj.data.base.BaseDataOps.from_file" title="caproj.data.base.BaseDataOps.from_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BaseDataOps.from_file()</span></code></a> or
+<a class="reference internal" href="#caproj.data.base.BaseDataOps.from_object" title="caproj.data.base.BaseDataOps.from_object"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BaseDataOps.from_object()</span></code></a></p></li>
+<li><p><strong>df_input</strong> – pandas.DataFrame original input copy, not operated
+upon by any class methods, and only created if
+<code class="docutils literal notranslate"><span class="pre">copy_input</span></code> parameter set to <code class="docutils literal notranslate"><span class="pre">True</span></code> during
+<a class="reference internal" href="#caproj.data.base.BaseDataOps.from_file" title="caproj.data.base.BaseDataOps.from_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BaseDataOps.from_file()</span></code></a> or <a class="reference internal" href="#caproj.data.base.BaseDataOps.from_object" title="caproj.data.base.BaseDataOps.from_object"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_object()</span></code></a>
+class creation</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Class methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.data.base.BaseDataOps.from_file" title="caproj.data.base.BaseDataOps.from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDataOps.from_file</span></code></a>(filename[, copy_input])</p></td>
+<td><p>Invoke BaseData class and read csv into pandas.DataFrame</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#caproj.data.base.BaseDataOps.from_object" title="caproj.data.base.BaseDataOps.from_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDataOps.from_object</span></code></a>(input_object[, …])</p></td>
+<td><p>Invoke BaseData and read dataframe from in-memory object</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.data.base.BaseDataOps.to_file" title="caproj.data.base.BaseDataOps.to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDataOps.to_file</span></code></a>(target_filename, …)</p></td>
+<td><p>Save current version of BaseDataOps.df to file in .csv format</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#caproj.data.base.BaseDataOps.log_record_count" title="caproj.data.base.BaseDataOps.log_record_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDataOps.log_record_count</span></code></a>([id_col])</p></td>
+<td><p>Log number of records and unique projects in <cite>BaseDataOps.df</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.data.base.BaseDataOps.lint_colnames" title="caproj.data.base.BaseDataOps.lint_colnames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDataOps.lint_colnames</span></code></a>()</p></td>
+<td><p>Normalize column name format using underscore (‘_’) as a separator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#caproj.data.base.BaseDataOps.rename_columns" title="caproj.data.base.BaseDataOps.rename_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDataOps.rename_columns</span></code></a>([map_dict, json_path])</p></td>
+<td><p>Map existing column names to new names based on input dictionary</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.data.base.BaseDataOps.set_dtypes" title="caproj.data.base.BaseDataOps.set_dtypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseDataOps.set_dtypes</span></code></a>([map_dict, …])</p></td>
+<td><p>Map and convert columns to specified data types</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="caproj.data.base.BaseDataOps.from_file">
+<em class="property">classmethod </em><code class="sig-name descname">from_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">copy_input</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">read_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps.from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invoke BaseData class and read csv into pandas.DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – str filename of .csv file to be read</p></li>
+<li><p><strong>copy_input</strong> – bool to specify whether <code class="docutils literal notranslate"><span class="pre">self.df_input</span></code> persists</p></li>
+<li><p><strong>read_kwargs</strong> – optional args to pandas.DataFrame.read_csv() or
+pandas.DataFrame.read_excel()</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pandas.DataFrame and copy_input bool as class attributes</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – if the <code class="docutils literal notranslate"><span class="pre">filename</span></code> is not a .csv filetype</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.base.BaseDataOps.from_object">
+<em class="property">classmethod </em><code class="sig-name descname">from_object</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_object</span></em>, <em class="sig-param"><span class="n">copy_input</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps.from_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invoke BaseData and read dataframe from in-memory object</p>
+<p>Input objects can be either (a) an existing <code class="docutils literal notranslate"><span class="pre">BaseData</span></code> object, in
+which case the <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> stored within that object will be
+read, or (b) a simple <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_object</strong> – object to be read into <code class="docutils literal notranslate"><span class="pre">BaseData</span></code></p></li>
+<li><p><strong>copy_input</strong> – bool to specify whether self.df_input persists</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pandas.DataFrame and copy_input bool as class variables</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exceptions</strong> – if the <code class="docutils literal notranslate"><span class="pre">input_object</span></code> is neither a
+pandas.Dataframe nor a <code class="docutils literal notranslate"><span class="pre">BaseData</span></code> object with an
+existing <code class="docutils literal notranslate"><span class="pre">BaseDataOps.df</span></code> attribute</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.base.BaseDataOps.lint_colnames">
+<code class="sig-name descname">lint_colnames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps.lint_colnames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize column name format using underscore (‘_’) as a separator</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.base.BaseDataOps.log_record_count">
+<code class="sig-name descname">log_record_count</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id_col</span><span class="o">=</span><span class="default_value">'PID'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps.log_record_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log number of records and unique projects in <cite>BaseDataOps.df</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.base.BaseDataOps.rename_columns">
+<code class="sig-name descname">rename_columns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">map_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">json_path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps.rename_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map existing column names to new names based on input dictionary</p>
+<p>A simple wrapper for the pandas <code class="docutils literal notranslate"><span class="pre">DataFrame.rename</span></code> method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – column name mapping {current_value: new_value},
+defaults to None</p></li>
+<li><p><strong>json_path</strong> (<em>str</em><em>, </em><em>optional</em>) – file path to json file storing the desired map_dict,
+defaults to None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.base.BaseDataOps.set_dtypes">
+<code class="sig-name descname">set_dtypes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">map_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">json_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">coerce</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps.set_dtypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map and convert columns to specified data types</p>
+<p>Internally, this function uses the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> <code class="docutils literal notranslate"><span class="pre">.to_*</span></code> data type
+conversion methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map_dict</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) – [description], defaults to None</p></li>
+<li><p><strong>json_path</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) – [description], defaults to None</p></li>
+<li><p><strong>coerce</strong> (<em>bool</em><em>, </em><em>optional</em>) – [description], defaults to False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.base.BaseDataOps.sort_values">
+<code class="sig-name descname">sort_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span></em>, <em class="sig-param"><span class="n">ascending</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">na_position</span><span class="o">=</span><span class="default_value">'last'</span></em>, <em class="sig-param"><span class="n">ignore_index</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps.sort_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort dataframe records by specified columns</p>
+<p>A simple implementation of the Pandas <code class="docutils literal notranslate"><span class="pre">sort_values</span></code> method. This operation
+is performed in place on the <code class="docutils literal notranslate"><span class="pre">BaseDataOps.df</span></code> stored attribute. Therefore,
+no objects are returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> (<em>str</em><em> or </em><em>list of str</em>) – Name or list of names to sort by.</p></li>
+<li><p><strong>ascending</strong> (<em>bool</em><em> or </em><em>list of bool</em><em>, </em><em>optional</em>) – Sort ascending vs. descending. Specify list for multiple
+sort orders. If this is a list of bools, must match the
+length of the by, defaults to True</p></li>
+<li><p><strong>na_position</strong> (<em>{‘first’</em><em>, </em><em>‘last’}</em><em>, </em><em>optional</em>) – Puts NaNs at the beginning if first; last puts NaNs at
+the end, defaults to ‘last’</p></li>
+<li><p><strong>ignore_index</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the resulting axis will be labeled 0, 1, …,
+n - 1; defaults to False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.base.BaseDataOps.to_file">
+<code class="sig-name descname">to_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_filename</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">to_csv_kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.base.BaseDataOps.to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save current version of BaseDataOps.df to file in .csv format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_filename</strong> – str filename to which csv should be written</p></li>
+<li><p><strong>to_csv_kwargs</strong> – optional args to pandas.DataFrame.to_csv()</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt id="caproj.data.base.log">
+<code class="sig-prename descclassname">caproj.data.base.</code><code class="sig-name descname">log</code><em class="property"> = &lt;Logger caproj.data.base (WARNING)&gt;</em><a class="headerlink" href="#caproj.data.base.log" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code> instance for module</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-caproj.data.clean"></span><div class="section" id="caproj-data-clean">
+<h2><a class="toc-backref" href="#contents">caproj.data.clean</a><a class="headerlink" href="#caproj-data-clean" title="Permalink to this headline">¶</a></h2>
+<p>This module contains BaseData mixin class to clean the NYC Capital Projects dataset</p>
+<p><strong>Module classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.data.clean.CleanMixin" title="caproj.data.clean.CleanMixin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CleanMixin</span></code></a>()</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BaseData</span></code> mixin class methods for cleansing the NYC capital projects dataset</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Module variables:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.data.clean.log" title="caproj.data.clean.log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code> instance for module</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py class">
+<dt id="caproj.data.clean.CleanMixin">
+<em class="property">class </em><code class="sig-prename descclassname">caproj.data.clean.</code><code class="sig-name descname">CleanMixin</code><a class="headerlink" href="#caproj.data.clean.CleanMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">BaseData</span></code> mixin class methods for cleansing the NYC capital projects dataset</p>
+<dl class="py method">
+<dt id="caproj.data.clean.CleanMixin.check_duplicates">
+<code class="sig-name descname">check_duplicates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.clean.CleanMixin.check_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check column or combination of columns for duplicate records</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>use pandas duplicated method with keep=False to identify dupe rows</p></li>
+<li><p>log # of duplicated rows and indices of duplicated values</p></li>
+<li><p>use value_counts to identify how many dupes per value &gt; 1 occurance</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.clean.CleanMixin.concat_values">
+<code class="sig-name descname">concat_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span></em>, <em class="sig-param"><span class="n">to_colname</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.clean.CleanMixin.concat_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add new column of values generated by concatenating other column’s values</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Add option to set desired length for each column’s values</p></li>
+<li><p>Add option to add seperator between values</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>columns</strong> (<em>str</em><em> or </em><em>list of str</em>) – name(s) of column(s) for which values should be concatenated</p></li>
+<li><p><strong>to_colname</strong> (<em>str</em>) – name of resulting column containing the concatenated values</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="caproj.data.clean.CleanMixin.remove_missing_records">
+<code class="sig-name descname">remove_missing_records</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.data.clean.CleanMixin.remove_missing_records" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete records with missing values in specified columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>columns</strong> (<em>str</em><em> or </em><em>list of str</em>) – column name(s) for columns to check for blank values, any
+record with a blank value in the columns will be dropped
+from dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt id="caproj.data.clean.log">
+<code class="sig-prename descclassname">caproj.data.clean.</code><code class="sig-name descname">log</code><em class="property"> = &lt;Logger caproj.data.clean (WARNING)&gt;</em><a class="headerlink" href="#caproj.data.clean.log" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">logging.getLogger</span></code> instance for module</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-caproj.features"></span><div class="section" id="caproj-features">
+<h2><a class="toc-backref" href="#contents">caproj.features</a><a class="headerlink" href="#caproj-features" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functionality for generating engineered features to be
+used in modeling for this project.</p>
+<p><strong>Module functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.features.placeholder" title="caproj.features.placeholder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">placeholder</span></code></a>()</p></td>
+<td><p>Placeholder function to illustrate testing and docs generation</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="caproj.features.placeholder">
+<code class="sig-prename descclassname">caproj.features.</code><code class="sig-name descname">placeholder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#caproj.features.placeholder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder function to illustrate testing and docs generation</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-caproj.models"></span><div class="section" id="caproj-models">
+<h2><a class="toc-backref" href="#contents">caproj.models</a><a class="headerlink" href="#caproj-models" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functionality for generating engineered features to be
+used in modeling for this project.</p>
+<p><strong>Module functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.models.placeholder" title="caproj.models.placeholder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">placeholder</span></code></a>()</p></td>
+<td><p>Placeholder function to illustrate testing and docs generation</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="caproj.models.placeholder">
+<code class="sig-prename descclassname">caproj.models.</code><code class="sig-name descname">placeholder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#caproj.models.placeholder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder function to illustrate testing and docs generation</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-caproj.visualizations"></span><div class="section" id="caproj-visualizations">
+<h2><a class="toc-backref" href="#contents">caproj.visualizations</a><a class="headerlink" href="#caproj-visualizations" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functions for visualizing data and model results</p>
+<p>FUNCTIONS</p>
+<blockquote>
+<div><dl class="simple">
+<dt>save_plot()</dt><dd><p>Save a matplotlib plot to file</p>
+</dd>
+<dt>plot_barplot()</dt><dd><p>Generate a horizontal barplot from a pandas value_counts series</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py function">
+<dt id="caproj.visualizations.plot_barplot">
+<code class="sig-prename descclassname">caproj.visualizations.</code><code class="sig-name descname">plot_barplot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value_counts</span></em>, <em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">6</span></em>, <em class="sig-param"><span class="n">varname</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">color</span><span class="o">=</span><span class="default_value">'k'</span></em>, <em class="sig-param"><span class="n">label_space</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">savepath</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.visualizations.plot_barplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a horizontal barplot from a pandas value_counts series</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_counts</strong> – pd.Series object generated by pandas value_counts()
+method</p></li>
+<li><p><strong>title</strong> – string, the printed title of the plot</p></li>
+<li><p><strong>height</strong> – integer, the desired height of the plot (default is 6)</p></li>
+<li><p><strong>color</strong> – string, the matplotlib color name for the color you would
+like for the plotted bars (default is ‘k’ or black)</p></li>
+<li><p><strong>label_space</strong> – float, a coefficient used to space the count label
+an appropriate distance from the plotted bar
+(default is 0.01)</p></li>
+<li><p><strong>savepath</strong> – string or none, specifies filepath at which to save the
+resulting barplot. If None, nothing is saved. (Default
+is None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a matplotlib plot is generated; no objects are returned</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="caproj.visualizations.save_plot">
+<code class="sig-prename descclassname">caproj.visualizations.</code><code class="sig-name descname">save_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plt_object</span></em>, <em class="sig-param"><span class="n">savepath</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.visualizations.save_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save a matplotlib plot to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plt_object</strong> – matplotlib.pyplot plot object</p></li>
+<li><p><strong>savepath</strong> – string or None, specifies filepath at which to save the
+matplotlib plot. If None, nothing is saved. (Default is
+None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>No objects are returned</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-caproj.logger"></span><div class="section" id="caproj-logger">
+<h2><a class="toc-backref" href="#contents">caproj.logger</a><a class="headerlink" href="#caproj-logger" title="Permalink to this headline">¶</a></h2>
+<p>This module contains logging-related features for the <code class="docutils literal notranslate"><span class="pre">caproj</span></code> package</p>
+<p><strong>Module functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.logger.logfunc" title="caproj.logger.logfunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logfunc</span></code></a>([orig_func, log, funcname, argvals, …])</p></td>
+<td><p>Wrap function call to provide log information when function is called</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#caproj.logger.start_logging" title="caproj.logger.start_logging"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_logging</span></code></a>([default_path, default_level, …])</p></td>
+<td><p>Set up logging configuration for <code class="docutils literal notranslate"><span class="pre">caproj</span></code> package</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="caproj.logger.logfunc">
+<code class="sig-prename descclassname">caproj.logger.</code><code class="sig-name descname">logfunc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orig_func</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">log</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funcname</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">argvals</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">docdescr</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">runtime</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.logger.logfunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap function call to provide log information when function is called</p>
+<p>This function acts as a <code class="docutils literal notranslate"><span class="pre">functools.wraps</span></code> decorator for decorating
+functions or methods to provide logging functionality to log details
+of the decorated function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orig_func</strong> – NoneType placeholder parameter</p></li>
+<li><p><strong>log</strong> – logging.getLogger object for logging, default is None</p></li>
+<li><p><strong>funcname</strong> – boolean indicating whether to log name of function,
+default is False</p></li>
+<li><p><strong>argvals</strong> – boolean indicating whether to log function arguments,
+default is False</p></li>
+<li><p><strong>docdescr</strong> – boolean indicating whether to log function docstring
+short description, default is False</p></li>
+<li><p><strong>runtime</strong> – boolean indicating whether to log function execution
+runtime in seconds, default is False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">functools.wraps</span></code> wrapper function</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@logfunc</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span> <span class="n">funcname</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">runtime</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All <code class="docutils literal notranslate"><span class="pre">logfunc</span></code> logs are generate at the ‘INFO’ logging level</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="caproj.logger.start_logging">
+<code class="sig-prename descclassname">caproj.logger.</code><code class="sig-name descname">start_logging</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">default_path</span><span class="o">=</span><span class="default_value">'logging.json'</span></em>, <em class="sig-param"><span class="n">default_level</span><span class="o">=</span><span class="default_value">'INFO'</span></em>, <em class="sig-param"><span class="n">env_key</span><span class="o">=</span><span class="default_value">'LOG_CFG'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.logger.start_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up logging configuration for <code class="docutils literal notranslate"><span class="pre">caproj</span></code> package</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>default_path</strong> – string file path for json formatted
+logging configuration file (default is
+‘logging.json’)</p></li>
+<li><p><strong>default_level</strong> – string indicating the default level
+for logging, accepts the following
+values: ‘DEBUG’, ‘INFO’, ‘WARNING’,
+‘ERROR’, ‘CRITICAL’ (default is ‘INFO’)</p></li>
+<li><p><strong>env_key</strong> – string indicating environment key if one exists
+(default is ‘LOG_CFG’)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-caproj.cli"></span><div class="section" id="caproj-cli">
+<h2><a class="toc-backref" href="#contents">caproj.cli</a><a class="headerlink" href="#caproj-cli" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the command line app for <code class="docutils literal notranslate"><span class="pre">caproj</span></code>.</p>
+<p>Why does this file exist, and why not put this in <code class="docutils literal notranslate"><span class="pre">__main__</span></code>?</p>
+<p>You might be tempted to import things from <code class="docutils literal notranslate"><span class="pre">__main__</span></code> later, but that will
+cause problems: the code will get executed twice:</p>
+<ul class="simple">
+<li><p>When you run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">caproj</span></code>, python will execute <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> as a
+script. That means there won’t be any <code class="docutils literal notranslate"><span class="pre">caproj.__main__</span></code> in <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code>.</p></li>
+<li><p>When you <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">__main__</span></code> it will get executed again (as a module) because
+there’s no <code class="docutils literal notranslate"><span class="pre">caproj.__main__</span></code> in <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code>.</p></li>
+<li><p>Also see (1) from <a class="reference external" href="http://click.pocoo.org/5/setuptools/#setuptools-integration">http://click.pocoo.org/5/setuptools/#setuptools-integration</a></p></li>
+</ul>
+<p><strong>Module functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#caproj.cli.main" title="caproj.cli.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>([args])</p></td>
+<td><p>Placeholder function for testing and to illustrate <code class="docutils literal notranslate"><span class="pre">caproj</span></code> cli</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="caproj.cli.main">
+<code class="sig-prename descclassname">caproj.cli.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#caproj.cli.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder function for testing and to illustrate <code class="docutils literal notranslate"><span class="pre">caproj</span></code> cli</p>
+<p>Prints list of input arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> – <code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">NoneType</span></code>, default is <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">caproj</span> <span class="n">foo</span> <span class="n">bar</span>
+<span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="introduction.html" title="Previous document">Introduction</a>
+        </li>
+        <li>
+          <a href="changelog.html" title="Next document">Changelog</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">caproj-sandbox</h1>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">An exploratory analysis experimenting with different approaches to feature engineering and modeling of NYC capital projects.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=sedelmeyer&repo=caproj-sandbox&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">NYC Capital Projects (SANDBOX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#caproj-data">caproj.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caproj-data-base">caproj.data.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caproj-data-clean">caproj.data.clean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caproj-features">caproj.features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caproj-models">caproj.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caproj-visualizations">caproj.visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caproj-logger">caproj.logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caproj-cli">caproj.cli</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://www.sedelmeyer.net/">Find me online at sedelmeyer.net</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/sedelmeyer">github/sedelmeyer</a></li>
+    
+    <li class="toctree-l1"><a href="https://www.linkedin.com/in/sedelmeyer/">linkedin/sedelmeyer</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="introduction.html" title="previous chapter">Introduction</a></li>
+      <li>Next: <a href="changelog.html" title="next chapter">Changelog</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019-2020, Michael Sedelmeyer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/sedelmeyer/caproj-sandbox" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

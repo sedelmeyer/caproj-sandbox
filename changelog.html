@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Changelog &#8212; NYC Capital Projects 0.1.dev0 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog &#8212; caproj-sandbox 0.0.4.dev103+gf175e1f.d20200724 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -13,11 +14,11 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <link rel="canonical" href="https://sedelmeyer.github.io/nyc-capital-projects/changelog.html" />
+    <link rel="canonical" href="https://sedelmeyer.github.io/caproj-sandbox/changelog.html" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Introduction" href="introduction.html" />
+    <link rel="prev" title="API Reference" href="modules.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -41,16 +42,55 @@
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <ul class="simple">
-<li><p>Recreate data cleansing pipeline with re-evaluated missing data handling</p></li>
-<li><p>Recreate data sub-setting module</p></li>
+<li><p>Add data cleansing pipeline requirements into <code class="docutils literal notranslate"><span class="pre">caproj.data</span></code> module Mixin classes</p>
+<ul>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">caproj.data.CleanMixin</span></code> class</p>
+<ul>
+<li><p>Identify missing data</p></li>
+<li><p>Remove records with no PID or no record date</p></li>
+<li><p>Confirm no duplicate PID / datetime combos</p></li>
+<li><p>Add change index column</p></li>
+<li><p>Add record unique ID column</p></li>
+<li><p>Fill missing project attribute fields based on prior or next earliest available info</p></li>
+<li><p>Fill project budget and schedule values</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Add missing data inspection and handling functionality to <code class="docutils literal notranslate"><span class="pre">caproj.BaseData</span></code> class via a new <code class="docutils literal notranslate"><span class="pre">MissingMixin</span></code> class</p></li>
+<li><p>Add Makefile for triggering data cleansing pipeline</p></li>
+<li><p>Add an <code class="docutils literal notranslate"><span class="pre">IntervalMixin</span></code> class for subsetting project change records based on desired year-interval</p></li>
 </ul>
 </div>
+</div>
+<div class="section" id="v0-0-4-2020-07-24">
+<h2>v0.0.4 (2020-07-24)<a class="headerlink" href="#v0-0-4-2020-07-24" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add tox automated tests for <code class="docutils literal notranslate"><span class="pre">py36</span></code>, <code class="docutils literal notranslate"><span class="pre">py37</span></code>, <code class="docutils literal notranslate"><span class="pre">py38</span></code>, <code class="docutils literal notranslate"><span class="pre">docs</span></code>, <code class="docutils literal notranslate"><span class="pre">linter</span></code></p></li>
+<li><p>Add GitHub Actions workflow with CI test matrix</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">caproj.data.BaseData</span></code> class as interface for accessing all data operations</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">caproj.data.base.BaseDataOps</span></code> class for providing <code class="docutils literal notranslate"><span class="pre">BaseData</span></code>’s core IO functionality</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">caproj.data.clean.CleanMixin</span></code> class for providing <code class="docutils literal notranslate"><span class="pre">BaseData</span></code> with required data cleansing functionality</p></li>
+<li><p>Rename project repo from <code class="docutils literal notranslate"><span class="pre">nyc-capital-projects</span></code> to <code class="docutils literal notranslate"><span class="pre">caproj-sandbox</span></code> to reflect experimental nature of this repo</p></li>
+</ul>
+</div>
+<div class="section" id="v0-0-3-2020-06-09">
+<h2>v0.0.3 (2020-06-09)<a class="headerlink" href="#v0-0-3-2020-06-09" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add logging configuration and basic <code class="docutils literal notranslate"><span class="pre">caproj.logger</span></code> module functionality</p></li>
+</ul>
+</div>
+<div class="section" id="v0-0-2-2020-05-26">
+<h2>v0.0.2 (2020-05-26)<a class="headerlink" href="#v0-0-2-2020-05-26" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>fix setup.cfg to prevent travis-ci build fail</p></li>
+</ul>
 </div>
 <div class="section" id="v0-0-1-2020-05-25">
 <h2>v0.0.1 (2020-05-25)<a class="headerlink" href="#v0-0-1-2020-05-25" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Generate intial site skeleton using <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> git branch</p></li>
-<li><p>Draft initial readme and introduction</p></li>
+<li><p>Draft initial readme and introduction text</p></li>
 <li><p>Add custom project logo and favicon</p></li>
 </ul>
 </div>
@@ -70,7 +110,7 @@
     <ul>
         <li>
           &larr;
-          <a href="introduction.html" title="Previous document">Introduction</a>
+          <a href="modules.html" title="Previous document">API Reference</a>
         </li>
     </ul>
   </nav>
@@ -84,7 +124,7 @@
   <a href="index.html">
     <img class="logo" src="_static/logo.png" alt="Logo"/>
     
-    <h1 class="logo logo-name">NYC Capital Projects</h1>
+    <h1 class="logo logo-name">caproj-sandbox</h1>
     
   </a>
 </p>
@@ -97,7 +137,7 @@
 
 
 <p>
-<iframe src="https://ghbtns.com/github-btn.html?user=sedelmeyer&repo=nyc-capital-projects&type=watch&count=true&size=large&v=2"
+<iframe src="https://ghbtns.com/github-btn.html?user=sedelmeyer&repo=caproj-sandbox&type=watch&count=true&size=large&v=2"
   allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
 </p>
 
@@ -105,24 +145,16 @@
 
 
 
-    
-
-<p>
-<a class="badge" href="https://travis-ci.org/sedelmeyer/nyc-capital-projects">
-    <img
-        alt="https://secure.travis-ci.org/sedelmeyer/nyc-capital-projects.svg?branch=master"
-        src="https://secure.travis-ci.org/sedelmeyer/nyc-capital-projects.svg?branch=master"
-    />
-</a>
-</p>
-
-
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">NYC Capital Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">NYC Capital Projects (SANDBOX)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#future-releases">Future releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-4-2020-07-24">v0.0.4 (2020-07-24)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-3-2020-06-09">v0.0.3 (2020-06-09)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-2-2020-05-26">v0.0.2 (2020-05-26)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-0-1-2020-05-25">v0.0.1 (2020-05-25)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-0-0-2020-05-24">v0.0.0 (2020-05-24)</a></li>
 </ul>
@@ -144,7 +176,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="introduction.html" title="previous chapter">Introduction</a></li>
+      <li>Previous: <a href="modules.html" title="previous chapter">API Reference</a></li>
   </ul></li>
 </ul>
 </div>
@@ -174,7 +206,7 @@
       &copy;2019-2020, Michael Sedelmeyer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
@@ -183,7 +215,7 @@
     </div>
 
     
-    <a href="https://github.com/sedelmeyer/nyc-capital-projects" class="github">
+    <a href="https://github.com/sedelmeyer/caproj-sandbox" class="github">
         <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
     </a>
     
