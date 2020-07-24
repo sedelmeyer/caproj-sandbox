@@ -31,7 +31,7 @@ log = logging.getLogger(__name__)
 """``logging.getLogger`` instance for module"""
 
 
-class BaseData(object):
+class BaseDataOps(object):
     """Manage base read/write operations for :py:mod:`caproj.data` module classes
 
     :cvar df: pandas.DataFrame working copy either read in from
