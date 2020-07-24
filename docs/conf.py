@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath("../src"))
 
 # -- Project information -----------------------------------------------------
 
-project = "NYC Capital Projects"
+project = "caproj-sandbox"
 year = "2019-2020"
 author = "Michael Sedelmeyer"
 copyright = "{0}, {1}".format(year, author)
@@ -28,7 +28,7 @@ copyright = "{0}, {1}".format(year, author)
 # The full version, including alpha/beta/rc tags, updated
 # using setuptools_scm
 try:
-    version = release = get_distribution("nyc-capital-projects").version
+    version = release = get_distribution("caproj-sandbox").version
 except Exception:
     traceback.print_exc()
     version = release = "0.0.0"
@@ -72,7 +72,7 @@ source_suffix = {
 html_theme = "alabaster"
 
 # html_baseurl is configured for GitHub's docs hosting
-html_baseurl = "https://sedelmeyer.github.io/nyc-capital-projects/"
+html_baseurl = "https://sedelmeyer.github.io/caproj-sandbox/"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -92,7 +92,7 @@ html_theme_options = {
     "logo": "logo.png",
     "logo_name": "true",
     "github_user": "sedelmeyer",
-    "github_repo": "nyc-capital-projects",
+    "github_repo": "caproj-sandbox",
     "fixed_sidebar": "false",
     "description": "An exploratory analysis experimenting with different "
     "approaches to feature engineering and modeling of NYC "
@@ -100,7 +100,7 @@ html_theme_options = {
     "badge_branch": "master",
     "github_banner": "true",
     "github_button": "true",
-    "travis_button": "true",
+    "travis_button": "false",
     "show_powered_by": "true",
     "show_relbar_bottom": "true",
     "extra_nav_links": {
