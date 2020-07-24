@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import print_function
+
 import io
 import re
 from glob import glob
@@ -67,7 +70,7 @@ setup(
         #   'rst': ['docutils>=0.11'],
         #   ':python_version=="2.6"': ['argparse'],
     },
-    entry_points={"console_scripts": ["caproj = caproj.cli:main",]},
+    entry_points={"console_scripts": ["caproj = caproj.cli:main"]},
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
 )
