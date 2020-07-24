@@ -6,7 +6,13 @@ API Reference
   :depth: 2
   :backlinks: top
 
+.. automodule:: caproj.data
+   :members:
+
 .. automodule:: caproj.data.base
+   :members:
+
+.. automodule:: caproj.data.clean
    :members:
 
 .. automodule:: caproj.features
