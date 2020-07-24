@@ -21,7 +21,6 @@ class BaseDataOpsIOTests(unittest.TestCase):
         """Set up data for tests"""
         self.x = [0, 1, 1, 0]
         self.data = pd.DataFrame({"PID": self.x, "y": [2, 3, 4, 5]})
-        return super().setUp()
 
     def test_from_file_csv(self):
         """Ensure csv is read and stored to BaseDataOps class"""
