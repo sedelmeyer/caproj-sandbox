@@ -1,22 +1,19 @@
-NYC Capital Projects
-====================
+NYC Capital Projects (SANDBOX)
+==============================
 
-This project is an exploratory analysis experimenting with different approaches to modeling and feature engineering to predict budget and schedule outcomes for New York City-managed capital projects with budgets greater than $25 million, using a `data set hosted by NYC Open Data`_.
+This project is an exploratory sandbox with which I seek to rebuild portions of an existing analysis of New York City-managed capital projects. The original analysis from which this repository borrows used different approaches to modeling and feature engineering to predict budget and schedule outcomes for NYC capital projects with budgets greater than $25 million, using a `data set hosted by NYC Open Data`_.
 
-.. image:: https://travis-ci.com/sedelmeyer/nyc-capital-projects.svg?branch=master
-    :target: https://travis-ci.com/sedelmeyer/nyc-capital-projects
-
-.. image:: https://github.com/sedelmeyer/nyc-capital-projects/workflows/build/badge.svg?branch=master
-    :target: https://github.com/sedelmeyer/nyc-capital-projects/actions
+.. image:: https://github.com/sedelmeyer/caproj-sandbox/workflows/build/badge.svg?branch=master
+    :target: https://github.com/sedelmeyer/caproj-sandbox/actions
 
 
 .. Note::
 
-   **This project is primarily being constructed for exploratory and personal learning purposes, where my current area of focus are approaches to generating tested and log-generating data pipelines. As such:**
+   **This project is primarily being constructed for my own personal learning experience, where my current area of focus are approaches to generating tested and log-generating data pipelines. As such:**
 
    * Please disregard existing project releases, because they do not adhere to semantic versioning standards.
 
-     * There is a chance that I may stabilize future releases, but that will be entirely dependent on how long I continue to work on this project.
+     * There is a chance that I may stabilize future releases, but that will be entirely dependent on how long I continue to work on this repository.
 
    * Please also disregard existing project documentation, which is currently not a focus of my current efforts.
 
@@ -29,7 +26,7 @@ This project is an exploratory analysis experimenting with different approaches 
 Summary
 -------
 
-This analysis is built upon one initially completed as a final project for `CS109B: Advanced Topics In Data Science`_, a course offered by Harvard University's John A. Paulson School of Engineering and Applied Sciences (SEAS). The authors of that original project are:
+This original analysis from which this one borrows was initially completed as a final project for `CS109B: Advanced Topics In Data Science`_, a course offered by Harvard University's John A. Paulson School of Engineering and Applied Sciences (SEAS). The authors of that original project are:
 
 - `An Hoang <https://github.com/hoangthienan95>`_
 - `Mark McDonald <https://github.com/mcdomx>`_
