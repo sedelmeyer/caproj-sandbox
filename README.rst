@@ -9,7 +9,7 @@ This project is an exploratory sandbox with which I seek to rebuild portions of 
 
 .. Note::
 
-   **This project is primarily being constructed for my own personal learning experience, where my current area of focus are approaches to generating tested and log-generating data pipelines. As such:**
+   **This project is primarily being constructed for my own personal learning experience, where my current areas of focus are approaches to generating tested and log-generating data pipelines. As such:**
 
    * Please disregard existing project releases, because they do not adhere to semantic versioning standards.
 
