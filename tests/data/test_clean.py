@@ -1,12 +1,7 @@
 """
 Unit tests for caproj.data.clean submodule
 """
-import contextlib
-import json
-import math
-import os
 import unittest
-import tempfile
 
 import pandas as pd
 import numpy as np
