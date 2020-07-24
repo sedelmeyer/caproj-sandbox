@@ -9,11 +9,15 @@ Predicting outcomes for NYC capital projects
 An investigation into feature engineering and modeling project-change data for large-scale capital projects.
 -------------------------------------------------------------------------------------------------------------
 
-.. note::
+.. Note::
 
-    This project is in the early stages of active development. Therefore this site currently contains little more than a starting skeleton with which to document the project and its findings as they are developed.
+   **This project is primarily being constructed for my own personal learning experience, where my current area of focus are approaches to generating tested and log-generating data pipelines. As such:**
 
-    Check back later for additional content.
+   * Please disregard existing project releases, because they do not adhere to semantic versioning standards.
+
+     * There is a chance that I may stabilize future releases, but that will be entirely dependent on how long I continue to work on this repository.
+
+   * Please also disregard existing project documentation, which is currently not a focus of my current efforts.
 
 .. toctree::
    :maxdepth: 2
