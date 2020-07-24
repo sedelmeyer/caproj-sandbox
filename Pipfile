@@ -9,6 +9,7 @@ pytest-cov = "*"
 flake8 = "*"
 sphinx = "*"
 tox = "*"
+black = "==19.10b0"
 
 [packages]
 caproj = {editable = true,path = "."}

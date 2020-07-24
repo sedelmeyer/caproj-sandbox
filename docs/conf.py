@@ -15,24 +15,23 @@ import sys
 import traceback
 from pkg_resources import get_distribution
 
-sys.path.insert(0, os.path.abspath('../src'))
+sys.path.insert(0, os.path.abspath("../src"))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'NYC Capital Projects'
-year = '2019'\
-    '-2020'
-author = 'Michael Sedelmeyer'
-copyright = '{0}, {1}'.format(year, author)
+project = "caproj-sandbox"
+year = "2019-2020"
+author = "Michael Sedelmeyer"
+copyright = "{0}, {1}".format(year, author)
 
 # The full version, including alpha/beta/rc tags, updated
 # using setuptools_scm
 try:
-    version = release = get_distribution('nyc-capital-projects').version
+    version = release = get_distribution("caproj-sandbox").version
 except Exception:
     traceback.print_exc()
-    version = release = '0.0.0'
+    version = release = "0.0.0"
 
 
 # -- General configuration ---------------------------------------------------
@@ -41,28 +40,28 @@ except Exception:
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.githubpages',
-    'sphinx.ext.graphviz',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.extlinks',
-    'sphinx.ext.todo',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.githubpages",
+    "sphinx.ext.graphviz",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.extlinks",
+    "sphinx.ext.todo",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 
 source_suffix = {
-    '.rst': 'restructuredtext',
-    '.md': 'markdown',
+    ".rst": "restructuredtext",
+    ".md": "markdown",
 }
 
 # -- Options for HTML output -------------------------------------------------
@@ -70,16 +69,15 @@ source_suffix = {
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = "alabaster"
 
 # html_baseurl is configured for GitHub's docs hosting
-html_baseurl = 'https://sedelmeyer.github.io/'\
-    'nyc-capital-projects/'
+html_baseurl = "https://sedelmeyer.github.io/caproj-sandbox/"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # uncomment to include auto-generated update data in html footer
 # html_last_updated_fmt = '%Y-%m-%d'
@@ -87,29 +85,29 @@ html_static_path = ['_static']
 # If using alabaster theme and hiding 'logo_name', use the 'logo' setting
 # in html_theme_options, otherwise, uncomment html_logo to activate site logo
 # html_logo = 'logo.png'
-html_favicon = '_static/favicon.ico'
+html_favicon = "_static/favicon.ico"
 
 # html theme options for alabaster
 html_theme_options = {
-    'logo': 'logo.png',
-    'logo_name': 'true',
-    'github_user': 'sedelmeyer',
-    'github_repo': 'nyc-capital-projects',
-    'fixed_sidebar': 'false',
-    'description': 'An exploratory analysis experimenting with different '
-                   'approaches to feature engineering and modeling of NYC '
-                   'capital projects.',
-    'badge_branch': 'master',
-    'github_banner': 'true',
-    'github_button': 'true',
-    'travis_button': 'true',
-    'show_powered_by': 'true',
-    'show_relbar_bottom': 'true',
-    'extra_nav_links': {
-        'Find me online at sedelmeyer.net': 'https://www.sedelmeyer.net/',
-        'github/sedelmeyer': 'https://github.com/sedelmeyer',
-        'linkedin/sedelmeyer': 'https://www.linkedin.com/in/sedelmeyer/'
-    }
+    "logo": "logo.png",
+    "logo_name": "true",
+    "github_user": "sedelmeyer",
+    "github_repo": "caproj-sandbox",
+    "fixed_sidebar": "false",
+    "description": "An exploratory analysis experimenting with different "
+    "approaches to feature engineering and modeling of NYC "
+    "capital projects.",
+    "badge_branch": "master",
+    "github_banner": "true",
+    "github_button": "true",
+    "travis_button": "false",
+    "show_powered_by": "true",
+    "show_relbar_bottom": "true",
+    "extra_nav_links": {
+        "Find me online at sedelmeyer.net": "https://www.sedelmeyer.net/",
+        "github/sedelmeyer": "https://github.com/sedelmeyer",
+        "linkedin/sedelmeyer": "https://www.linkedin.com/in/sedelmeyer/",
+    },
 }
 
 # -- Extension configuration -------------------------------------------------
