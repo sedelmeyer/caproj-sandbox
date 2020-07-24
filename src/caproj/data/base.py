@@ -8,7 +8,7 @@ This module contains the core :mod:`caproj.data` read and write functionality
 
 .. autosummary::
 
-   BaseData
+   BaseDataOps
 
 **Module variables:**
 
@@ -32,29 +32,29 @@ log = logging.getLogger(__name__)
 
 
 class BaseDataOps(object):
-    """Manage base read/write operations for :py:mod:`caproj.data` module classes
+    """Manage base read/write operations for :mod:`caproj.data` module classes
 
-    :cvar df: pandas.DataFrame working copy either read in from
+    :cvar self.df: pandas.DataFrame working copy either read in from
               from file or from an existing object by using ``BaseData``
-              initializing class methods :meth:`BaseData.from_file` or
-              :meth:`BaseData.from_object`
-    :cvar df_input: pandas.DataFrame original input copy, not operated
+              initializing class methods :meth:`BaseDataOps.from_file` or
+              :meth:`BaseDataOps.from_object`
+    :cvar self.df_input: pandas.DataFrame original input copy, not operated
                     upon by any class methods, and only created if
                     ``copy_input`` parameter set to ``True`` during
-                    :meth:`BaseData.from_file` or :meth:`~BaseData.from_object`
+                    :meth:`BaseDataOps.from_file` or :meth:`~BaseDataOps.from_object`
                     class creation
 
     **Class methods:**
 
     .. autosummary::
 
-       BaseData.from_file
-       BaseData.from_object
-       BaseData.to_file
-       BaseData.log_record_count
-       BaseData.lint_colnames
-       BaseData.rename_columns
-       BaseData.set_dtypes
+       BaseDataOps.from_file
+       BaseDataOps.from_object
+       BaseDataOps.to_file
+       BaseDataOps.log_record_count
+       BaseDataOps.lint_colnames
+       BaseDataOps.rename_columns
+       BaseDataOps.set_dtypes
     """
 
     def __init__(self, df_input, copy_input):
@@ -77,7 +77,7 @@ class BaseDataOps(object):
         """Invoke BaseData class and read csv into pandas.DataFrame
 
         :param filename: str filename of .csv file to be read
-        :param copy_input: bool to specify whether self.df_input persists
+        :param copy_input: bool to specify whether ``self.df_input`` persists
         :param read_kwargs: optional args to pandas.DataFrame.read_csv() or
                             pandas.DataFrame.read_excel()
         :return: pandas.DataFrame and copy_input bool as class attributes
@@ -104,9 +104,9 @@ class BaseDataOps(object):
         :param input_object: object to be read into ``BaseData``
         :param copy_input: bool to specify whether self.df_input persists
         :return: pandas.DataFrame and copy_input bool as class variables
-        :raise Exceptions: if the ``input_object`` is neither a
+        :raise Exception: if the ``input_object`` is neither a
                            pandas.Dataframe nor a ``BaseData`` object with an
-                           existing ``BaseData.df`` attribute
+                           existing ``BaseDataOps.df`` attribute
 
         """
         if isinstance(input_object, pd.DataFrame):
@@ -126,7 +126,7 @@ class BaseDataOps(object):
 
     @logfunc(log=log, funcname=True, docdescr=True, argvals=True, runtime=False)
     def to_file(self, target_filename, **to_csv_kwargs):
-        """Save current version of BaseData.df to file in .csv format
+        """Save current version of BaseDataOps.df to file in .csv format
 
         :param target_filename: str filename to which csv should be written
         :param to_csv_kwargs: optional args to pandas.DataFrame.to_csv()
@@ -134,7 +134,7 @@ class BaseDataOps(object):
         self.df.to_csv(target_filename, index=False, **to_csv_kwargs)
 
     def log_record_count(self, id_col="PID"):
-        """Log number of records and unique projects in `BaseData.df`
+        """Log number of records and unique projects in `BaseDataOps.df`
         """
         self.log.info(
             "Number of project change records: {}".format(len(self.df))
@@ -373,7 +373,7 @@ class BaseDataOps(object):
         """Sort dataframe records by specified columns
 
         A simple implementation of the Pandas ``sort_values`` method. This operation
-        is performed in place on the ``BaseData.df`` stored attribute. Therefore,
+        is performed in place on the ``BaseDataOps.df`` stored attribute. Therefore,
         no objects are returned.
 
         :param by: Name or list of names to sort by.
